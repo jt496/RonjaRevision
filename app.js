@@ -263,7 +263,28 @@ try {
     console.error("Failed to initialize Supabase client:", e);
 }
 
-const CLOUD_STATE_ID = 'ronja_revision_state';
+// Get or generate a unique sync token
+function getSyncToken() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let token = urlParams.get('token');
+    
+    if (!token) {
+        token = localStorage.getItem("ronja_sync_token");
+        if (!token) {
+            // Generate a simple unique token format: plan_abc123...
+            token = 'plan_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+            localStorage.setItem("ronja_sync_token", token);
+        }
+        // Update URL bar silently without reloading page
+        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?token=' + token;
+        window.history.replaceState({ path: newUrl }, '', newUrl);
+    } else {
+        localStorage.setItem("ronja_sync_token", token);
+    }
+    return token;
+}
+
+const CLOUD_STATE_ID = getSyncToken();
 let isSyncing = false;
 let cloudSyncTimer = null;
 
@@ -588,6 +609,7 @@ function setupEventListeners() {
     // Supabase Sync Buttons
     const pushBtn = document.getElementById("sync-push-btn");
     const pullBtn = document.getElementById("sync-pull-btn");
+    const shareBtn = document.getElementById("sync-share-btn");
     
     if (pushBtn) {
         pushBtn.addEventListener("click", () => {
@@ -600,6 +622,22 @@ function setupEventListeners() {
             if (confirm("Are you sure you want to load your progress from the cloud? This will overwrite your current unsaved local changes.")) {
                 pullFromCloud(false);
             }
+        });
+    }
+
+    if (shareBtn) {
+        shareBtn.addEventListener("click", () => {
+            const shareUrl = window.location.href;
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                const originalText = shareBtn.innerHTML;
+                shareBtn.innerHTML = '<i data-lucide="check"></i> Link Copied!';
+                setTimeout(() => {
+                    shareBtn.innerHTML = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error("Failed to copy link:", err);
+                alert("Failed to copy link. Please copy the URL from your address bar.");
+            });
         });
     }
 }

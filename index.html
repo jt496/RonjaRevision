@@ -36,6 +36,22 @@
                 </button>
             </nav>
 
+            <div class="sidebar-sync no-print">
+                <div class="sync-header">
+                    <i data-lucide="cloud"></i>
+                    <span>Cloud Sync</span>
+                </div>
+                <div class="sync-status" id="sync-status">Connecting...</div>
+                <div class="sync-btn-group">
+                    <button class="sync-btn" id="sync-push-btn" title="Push local progress to cloud">
+                        <i data-lucide="upload-cloud"></i> Push
+                    </button>
+                    <button class="sync-btn" id="sync-pull-btn" title="Pull progress from cloud">
+                        <i data-lucide="download-cloud"></i> Pull
+                    </button>
+                </div>
+            </div>
+
             <div class="sidebar-footer">
                 <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Light/Dark Mode">
                     <i data-lucide="sun" class="sun-icon"></i>
@@ -220,6 +236,8 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

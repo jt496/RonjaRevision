@@ -252,13 +252,155 @@ const END_DATE_STR = "2026-06-22";
 // Active selected day in modal
 let activeModalDate = null;
 
+// Supabase Sync Configuration & Logic
+let db = null;
+try {
+    if (typeof supabase !== 'undefined' && typeof SUPABASE_URL !== 'undefined') {
+        const { createClient } = supabase;
+        db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+} catch (e) {
+    console.error("Failed to initialize Supabase client:", e);
+}
+
+const CLOUD_STATE_ID = 'ronja_revision_state';
+let isSyncing = false;
+let cloudSyncTimer = null;
+
+function updateSyncStatusUI(status, type = 'info') {
+    const statusEl = document.getElementById("sync-status");
+    if (!statusEl) return;
+    
+    statusEl.textContent = status;
+    
+    if (type === 'success') {
+        statusEl.style.color = 'var(--success-color)';
+    } else if (type === 'error') {
+        statusEl.style.color = 'var(--danger-color)';
+    } else if (type === 'warning') {
+        statusEl.style.color = 'var(--color-history)'; // Orange/amber color
+    } else {
+        statusEl.style.color = 'var(--text-secondary)';
+    }
+}
+
+async function pushToCloud() {
+    if (!db) {
+        updateSyncStatusUI("Cloud Sync: Offline", "error");
+        return;
+    }
+    
+    try {
+        isSyncing = true;
+        updateSyncStatusUI("Cloud Sync: Saving...", "warning");
+        
+        const payload = {
+            id: CLOUD_STATE_ID,
+            state: state,
+            updated_at: new Date().toISOString()
+        };
+        
+        const { error } = await db
+            .from('ronja_revision')
+            .upsert(payload);
+            
+        if (error) throw error;
+        
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        updateSyncStatusUI(`Cloud Sync: Saved at ${timeStr}`, "success");
+    } catch (e) {
+        console.error("Cloud push failed:", e);
+        updateSyncStatusUI("Cloud Sync: Save failed", "error");
+    } finally {
+        isSyncing = false;
+    }
+}
+
+function triggerCloudSave() {
+    clearTimeout(cloudSyncTimer);
+    if (!db) return;
+    
+    updateSyncStatusUI("Cloud Sync: Pending changes...", "info");
+    cloudSyncTimer = setTimeout(() => {
+        pushToCloud();
+    }, 2000);
+}
+
+async function pullFromCloud(silent = false) {
+    if (!db) {
+        if (!silent) alert("Supabase is not connected.");
+        updateSyncStatusUI("Cloud Sync: Offline", "error");
+        return false;
+    }
+    
+    try {
+        if (!silent) updateSyncStatusUI("Cloud Sync: Pulling...", "warning");
+        
+        const { data, error } = await db
+            .from('ronja_revision')
+            .select('state, updated_at')
+            .eq('id', CLOUD_STATE_ID)
+            .maybeSingle();
+            
+        if (error) throw error;
+        
+        if (data && data.state) {
+            state = data.state;
+            
+            // Sync to local storage
+            localStorage.setItem("ronja_gcse_planner", JSON.stringify(state));
+            
+            // Re-render interface
+            setupTheme();
+            updateDateDisplay();
+            renderAll();
+            
+            const updatedDate = new Date(data.updated_at);
+            const timeStr = updatedDate.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+            const dateStr = updatedDate.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+            updateSyncStatusUI(`Cloud Sync: Loaded (${dateStr} ${timeStr})`, "success");
+            
+            if (!silent) {
+                alert("Progress successfully loaded from Supabase!");
+            }
+            return true;
+        } else {
+            updateSyncStatusUI("Cloud Sync: No backup found", "info");
+            if (!silent) {
+                alert("No progress backup found on Supabase cloud. Click 'Push' to save your current local progress first.");
+            }
+            return false;
+        }
+    } catch (e) {
+        console.error("Cloud pull failed:", e);
+        updateSyncStatusUI("Cloud Sync: Pull failed", "error");
+        if (!silent) {
+            alert("Failed to load progress from Supabase: " + e.message);
+        }
+        return false;
+    }
+}
+
 // Initialize App
-function initApp() {
+async function initApp() {
     loadState();
     setupTheme();
     setupEventListeners();
     updateDateDisplay();
     renderAll();
+    
+    // Connect and pull latest from Supabase
+    if (db) {
+        updateSyncStatusUI("Cloud Sync: Connecting...", "info");
+        const success = await pullFromCloud(true);
+        if (!success) {
+            updateSyncStatusUI("Cloud Sync: Initializing...", "info");
+            await pushToCloud();
+        }
+    } else {
+        updateSyncStatusUI("Cloud Sync: Offline mode", "info");
+    }
 }
 
 // Load state from localStorage or defaults
@@ -318,6 +460,7 @@ function restoreDefaults() {
 
 function saveState() {
     localStorage.setItem("ronja_gcse_planner", JSON.stringify(state));
+    triggerCloudSave();
 }
 
 function setupTheme() {
@@ -441,6 +584,24 @@ function setupEventListeners() {
             renderAll();
         }
     });
+
+    // Supabase Sync Buttons
+    const pushBtn = document.getElementById("sync-push-btn");
+    const pullBtn = document.getElementById("sync-pull-btn");
+    
+    if (pushBtn) {
+        pushBtn.addEventListener("click", () => {
+            pushToCloud();
+        });
+    }
+    
+    if (pullBtn) {
+        pullBtn.addEventListener("click", () => {
+            if (confirm("Are you sure you want to load your progress from the cloud? This will overwrite your current unsaved local changes.")) {
+                pullFromCloud(false);
+            }
+        });
+    }
 }
 
 // Helpers

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ronja's GCSE Revision Planner</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="app-sidebar no-print">
+            <div class="sidebar-header">
+                <div class="avatar">R</div>
+                <div>
+                    <h2>Ronja</h2>
+                    <p class="role">GCSE Mock Candidate</p>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <button class="nav-btn active" data-tab="dashboard" id="btn-dashboard">
+                    <i data-lucide="layout-dashboard"></i> Dashboard
+                </button>
+                <button class="nav-btn" data-tab="calendar" id="btn-calendar">
+                    <i data-lucide="calendar"></i> Revision Calendar
+                </button>
+                <button class="nav-btn" data-tab="subjects" id="btn-subjects">
+                    <i data-lucide="book-open"></i> Subject Tracker
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Light/Dark Mode">
+                    <i data-lucide="sun" class="sun-icon"></i>
+                    <i data-lucide="moon" class="moon-icon"></i>
+                    <span>Toggle Theme</span>
+                </button>
+                <button class="print-btn" id="print-schedule-btn">
+                    <i data-lucide="printer"></i> Print Schedule
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <!-- Header (always visible) -->
+            <header class="main-header no-print">
+                <div class="header-title">
+                    <h1>GCSE Mock Revision Planner</h1>
+                    <p id="current-date-display">Today is loading...</p>
+                </div>
+                <div class="header-stats">
+                    <div class="stat-card">
+                        <span class="stat-label">Total Progress</span>
+                        <div class="stat-progress-bar">
+                            <div class="progress-fill" id="total-progress-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="stat-value" id="total-progress-text">0/58 Hours (0%)</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Tab content: Dashboard -->
+            <section id="tab-dashboard" class="tab-content active">
+                <div class="dashboard-grid">
+                    <!-- Today's Focus Card -->
+                    <div class="dash-card today-focus-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i data-lucide="check-square"></i></div>
+                            <h3>Today's Study Plan</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="today-date-sub" id="today-card-date">Loading...</p>
+                            <div id="today-tasks-container">
+                                <!-- Populated dynamically by app.js -->
+                            </div>
+                            <div class="daily-note-section">
+                                <label for="today-note">Today's Notes</label>
+                                <textarea id="today-note" placeholder="Write down topics studied, questions gotten wrong, or goals..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Overall Stats Card -->
+                    <div class="dash-card stats-overview-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i data-lucide="trending-up"></i></div>
+                            <h3>Completion Overview</h3>
+                        </div>
+                        <div class="card-body stats-body">
+                            <div class="circular-progress-container">
+                                <svg class="progress-ring" width="120" height="120">
+                                    <circle class="progress-ring-bg" stroke="#eff2f5" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                                    <circle class="progress-ring-circle" id="circle-progress" stroke="var(--primary-color)" stroke-dasharray="314.15" stroke-dashoffset="314.15" stroke-width="8" fill="transparent" r="50" cx="60" cy="60"/>
+                                </svg>
+                                <div class="ring-text" id="ring-percent-text">0%</div>
+                            </div>
+                            <div class="stats-mini-grid">
+                                <div class="mini-stat">
+                                    <span class="mini-val" id="stats-days-remaining">0</span>
+                                    <span class="mini-lbl">Days Left</span>
+                                </div>
+                                <div class="mini-stat">
+                                    <span class="mini-val" id="stats-completed-days">0</span>
+                                    <span class="mini-lbl">Days Completed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Countdowns List -->
+                    <div class="dash-card countdowns-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i data-lucide="clock"></i></div>
+                            <h3>Exams Countdown</h3>
+                        </div>
+                        <div class="card-body" id="countdowns-list-container">
+                            <!-- Populated dynamically by app.js -->
+                        </div>
+                    </div>
+
+                    <!-- Motivational Tip Card -->
+                    <div class="dash-card tip-card">
+                        <div class="card-header">
+                            <div class="card-icon"><i data-lucide="sparkles"></i></div>
+                            <h3>Study Tip of the Day</h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="tip-text" id="daily-tip-text">"The secret of getting ahead is getting started." — Mark Twain</p>
+                            <span class="tip-topic">Active Recall</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab content: Calendar -->
+            <section id="tab-calendar" class="tab-content">
+                <div class="calendar-controls no-print">
+                    <h2>Revision Calendar</h2>
+                    <p class="info-text">Your structured daily plan. Click any day to view notes, swap subjects, or check it off.</p>
+                </div>
+
+                <!-- Printable Calendar Title (shows only when printing) -->
+                <div class="print-header only-print">
+                    <h1>Ronja's GCSE Revision Calendar</h1>
+                    <p>May 24th - June 22nd | 2 Hours Revision per Day</p>
+                </div>
+
+                <div class="calendar-grid" id="calendar-grid-container">
+                    <!-- Populated dynamically by app.js -->
+                </div>
+            </section>
+
+            <!-- Tab content: Subjects -->
+            <section id="tab-subjects" class="tab-content">
+                <div class="subjects-header no-print">
+                    <h2>Subject & Subtopic Tracker</h2>
+                    <p class="info-text">Track your syllabus subtopics and monitor how many hours you have revised each subject.</p>
+                </div>
+
+                <div class="subjects-container" id="subjects-container-list">
+                    <!-- Populated dynamically by app.js -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Day details Modal -->
+    <div class="modal-backdrop no-print" id="day-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-date-title">Date details</h3>
+                <button class="close-modal" id="close-modal-btn"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <div id="modal-exam-alert" class="modal-exam-banner" style="display: none;">
+                    <i data-lucide="alert-triangle"></i> <span>Exam today!</span>
+                </div>
+                
+                <div class="modal-revision-list">
+                    <h4>Scheduled Revision (2 Hours)</h4>
+                    <div id="modal-tasks-list">
+                        <!-- Items rendered here -->
+                    </div>
+                </div>
+
+                <div class="modal-subject-selector-area">
+                    <label>Modify Revision Subject(s):</label>
+                    <div class="selector-row">
+                        <select id="modal-select-sub1">
+                            <!-- Populated with subjects -->
+                        </select>
+                        <select id="modal-select-sub2">
+                            <!-- Populated with subjects -->
+                        </select>
+                        <button class="save-subject-change-btn" id="modal-save-subjects-btn">Update</button>
+                    </div>
+                    <span class="helper-text">You can change what you study today if you need to switch things up!</span>
+                </div>
+
+                <div class="modal-notes-section">
+                    <label for="modal-notes-text">Study Notes & Log:</label>
+                    <textarea id="modal-notes-text" placeholder="What did you focus on today? Any equations or topics to review?"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn-secondary" id="modal-toggle-status-btn">Mark Day Complete</button>
+                <button class="action-btn" id="modal-save-btn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

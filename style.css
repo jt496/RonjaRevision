@@ -22,6 +22,7 @@
     --color-film: #f43f5e;
     --color-physics: #06b6d4;
     --color-history: #f59e0b;
+    --color-art: #f97316;
 }
 
 .light-theme {
@@ -659,6 +660,7 @@ body:not(.light-theme) .theme-toggle-btn .moon-icon {
 .badge-film { background-color: var(--color-film); }
 .badge-physics { background-color: var(--color-physics); }
 .badge-history { background-color: var(--color-history); }
+.badge-art { background-color: var(--color-art); }
 
 .day-exam-indicator {
     background: linear-gradient(135deg, var(--danger-color), #b91c1c);

@@ -150,7 +150,7 @@
                 <!-- Printable Calendar Title (shows only when printing) -->
                 <div class="print-header only-print">
                     <h1>Ronja's GCSE Revision Calendar</h1>
-                    <p>May 24th - June 22nd | 2 Hours Revision per Day</p>
+                    <p>May 24th - June 22nd | 3 Hours Revision per Day</p>
                 </div>
 
                 <div class="calendar-grid" id="calendar-grid-container">
@@ -185,7 +185,7 @@
                 </div>
                 
                 <div class="modal-revision-list">
-                    <h4>Scheduled Revision (2 Hours)</h4>
+                    <h4 id="modal-scheduled-title">Scheduled Revision</h4>
                     <div id="modal-tasks-list">
                         <!-- Items rendered here -->
                     </div>
@@ -198,6 +198,9 @@
                             <!-- Populated with subjects -->
                         </select>
                         <select id="modal-select-sub2">
+                            <!-- Populated with subjects -->
+                        </select>
+                        <select id="modal-select-sub3">
                             <!-- Populated with subjects -->
                         </select>
                         <button class="save-subject-change-btn" id="modal-save-subjects-btn">Update</button>

@@ -27,141 +27,407 @@ let EXAMS = [
 
 let DEFAULT_SCHEDULE = {
   "2026-05-24": [
-    { "subject": "Art Coursework", "hours": 1, "completed": false },
-    { "subject": "Film Studies", "hours": 1, "completed": false },
-    { "subject": "English Literature", "hours": 1, "completed": false }
+    {
+      "subject": "Art Coursework",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Film Studies",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "English Literature",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-05-25": [
-    { "subject": "Art Coursework", "hours": 1, "completed": false },
-    { "subject": "Maths", "hours": 1, "completed": false },
-    { "subject": "English Literature", "hours": 1, "completed": false }
+    {
+      "subject": "Art Coursework",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Film Studies",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "English Literature",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-05-26": [
-    { "subject": "Art Coursework", "hours": 1, "completed": false },
-    { "subject": "English Literature", "hours": 1, "completed": false },
-    { "subject": "Physics", "hours": 1, "completed": false }
+    {
+      "subject": "Art Coursework",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "English Literature",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Physics",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-05-27": [
-    { "subject": "Art Coursework", "hours": 1, "completed": false },
-    { "subject": "Chemistry", "hours": 1, "completed": false },
-    { "subject": "English Language", "hours": 1, "completed": false }
+    {
+      "subject": "Art Coursework",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Chemistry",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "English Language",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-05-28": [
-    { "subject": "Art Coursework", "hours": 1, "completed": false },
-    { "subject": "History", "hours": 1, "completed": false },
-    { "subject": "Film Studies", "hours": 1, "completed": false }
+    {
+      "subject": "Art Coursework",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "History",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Film Studies",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-05-29": [
-    { "subject": "Art Coursework", "hours": 1, "completed": false },
-    { "subject": "Maths", "hours": 1, "completed": false },
-    { "subject": "English Literature", "hours": 1, "completed": false }
+    {
+      "subject": "Art Coursework",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "English Language",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "English Literature",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-05-30": [
-    { "subject": "Art Coursework", "hours": 1, "completed": false },
-    { "subject": "Chemistry", "hours": 1, "completed": false },
-    { "subject": "Physics", "hours": 1, "completed": false }
+    {
+      "subject": "Art Coursework",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Chemistry",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Physics",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-05-31": [
-    { "subject": "Art Coursework", "hours": 1, "completed": false },
-    { "subject": "English Literature", "hours": 1, "completed": false },
-    { "subject": "English Language", "hours": 1, "completed": false }
+    {
+      "subject": "Art Coursework",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "English Literature",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "English Language",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-01": [
-    { "subject": "History", "hours": 1, "completed": false },
-    { "subject": "Film Studies", "hours": 1, "completed": false },
-    { "subject": "Physics", "hours": 1, "completed": false }
+    {
+      "subject": "History",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Film Studies",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Physics",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-02": [
-    { "subject": "Maths", "hours": 1, "completed": false },
-    { "subject": "Chemistry", "hours": 1, "completed": false },
-    { "subject": "English Language", "hours": 1, "completed": false }
+    {
+      "subject": "Chemistry",
+      "hours": 2,
+      "completed": false
+    },
+    {
+      "subject": "English Language",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-03": [
-    { "subject": "English Literature", "hours": 1, "completed": false },
-    { "subject": "Physics", "hours": 1, "completed": false },
-    { "subject": "Film Studies", "hours": 1, "completed": false }
+    {
+      "subject": "English Literature",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Physics",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Film Studies",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-04": [
-    { "subject": "Chemistry", "hours": 1, "completed": false },
-    { "subject": "English Language", "hours": 1, "completed": false },
-    { "subject": "History", "hours": 1, "completed": false }
+    {
+      "subject": "Chemistry",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "English Language",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "History",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-05": [
-    { "subject": "English Literature", "hours": 1, "completed": false },
-    { "subject": "Chemistry", "hours": 1, "completed": false },
-    { "subject": "Film Studies", "hours": 1, "completed": false }
+    {
+      "subject": "English Literature",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Chemistry",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Film Studies",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-06": [
-    { "subject": "English Literature", "hours": 1, "completed": false },
-    { "subject": "Chemistry", "hours": 1, "completed": false },
-    { "subject": "Physics", "hours": 1, "completed": false }
+    {
+      "subject": "English Literature",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Chemistry",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Physics",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-07": [
-    { "subject": "Maths", "hours": 1, "completed": false },
-    { "subject": "Chemistry", "hours": 1, "completed": false },
-    { "subject": "English Literature", "hours": 1, "completed": false }
+    {
+      "subject": "English Language",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Chemistry",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "English Literature",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-08": [
-    { "subject": "English Literature", "hours": 3, "completed": false }
+    {
+      "subject": "English Literature",
+      "hours": 3,
+      "completed": false
+    }
   ],
   "2026-06-09": [
-    { "subject": "Chemistry", "hours": 3, "completed": false }
+    {
+      "subject": "Chemistry",
+      "hours": 3,
+      "completed": false
+    }
   ],
   "2026-06-10": [
-    { "subject": "Physics", "hours": 1, "completed": false },
-    { "subject": "History", "hours": 1, "completed": false },
-    { "subject": "Film Studies", "hours": 1, "completed": false }
+    {
+      "subject": "Physics",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "History",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Film Studies",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-11": [
-    { "subject": "Maths", "hours": 1, "completed": false },
-    { "subject": "English Language", "hours": 1, "completed": false },
-    { "subject": "Physics", "hours": 1, "completed": false }
+    {
+      "subject": "Physics",
+      "hours": 2,
+      "completed": false
+    },
+    {
+      "subject": "English Language",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-12": [
-    { "subject": "Maths", "hours": 1, "completed": false },
-    { "subject": "Film Studies", "hours": 1, "completed": false },
-    { "subject": "History", "hours": 1, "completed": false }
+    {
+      "subject": "English Language",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Film Studies",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "History",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-13": [
-    { "subject": "Maths", "hours": 1, "completed": false },
-    { "subject": "Physics", "hours": 1, "completed": false },
-    { "subject": "English Language", "hours": 1, "completed": false }
+    {
+      "subject": "History",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Physics",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "English Language",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-14": [
-    { "subject": "Maths", "hours": 1, "completed": false },
-    { "subject": "English Language", "hours": 1, "completed": false },
-    { "subject": "History", "hours": 1, "completed": false }
+    {
+      "subject": "Film Studies",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "English Language",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "History",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-15": [
-    { "subject": "English Language", "hours": 1, "completed": false },
-    { "subject": "Film Studies", "hours": 2, "completed": false }
+    {
+      "subject": "English Language",
+      "hours": 1,
+      "completed": false
+    },
+    {
+      "subject": "Film Studies",
+      "hours": 2,
+      "completed": false
+    }
   ],
   "2026-06-16": [
-    { "subject": "Physics", "hours": 2, "completed": false },
-    { "subject": "History", "hours": 1, "completed": false }
+    {
+      "subject": "Physics",
+      "hours": 2,
+      "completed": false
+    },
+    {
+      "subject": "History",
+      "hours": 1,
+      "completed": false
+    }
   ],
   "2026-06-17": [
-    { "subject": "History", "hours": 3, "completed": false }
+    {
+      "subject": "History",
+      "hours": 3,
+      "completed": false
+    }
   ],
   "2026-06-18": [
-    { "subject": "Maths", "hours": 1, "completed": false },
-    { "subject": "Film Studies", "hours": 1, "completed": false },
-    { "subject": "English Language", "hours": 1, "completed": false }
+    {
+      "subject": "Maths",
+      "hours": 3,
+      "completed": false
+    }
   ],
   "2026-06-19": [
-    { "subject": "Maths", "hours": 1, "completed": false },
-    { "subject": "Chemistry", "hours": 1, "completed": false },
-    { "subject": "English Language", "hours": 1, "completed": false }
+    {
+      "subject": "Maths",
+      "hours": 3,
+      "completed": false
+    }
   ],
   "2026-06-20": [
-    { "subject": "Maths", "hours": 1, "completed": false },
-    { "subject": "Physics", "hours": 1, "completed": false },
-    { "subject": "English Language", "hours": 1, "completed": false }
+    {
+      "subject": "Maths",
+      "hours": 3,
+      "completed": false
+    }
   ],
   "2026-06-21": [
-    { "subject": "Maths", "hours": 1, "completed": false },
-    { "subject": "History", "hours": 1, "completed": false },
-    { "subject": "Film Studies", "hours": 1, "completed": false }
+    {
+      "subject": "Maths",
+      "hours": 3,
+      "completed": false
+    }
   ],
   "2026-06-22": []
 };
@@ -370,10 +636,14 @@ async function pullFromCloud(silent = false) {
         
         if (data && data.state) {
             state = data.state;
-            ensureStateSchema();
+            const changed = ensureStateSchema();
             
             // Sync to local storage
             localStorage.setItem("ronja_gcse_planner", JSON.stringify(state));
+            
+            if (changed) {
+                triggerCloudSave();
+            }
             
             // Re-render interface
             setupTheme();
@@ -462,25 +732,138 @@ async function initApp() {
 }
 
 // Normalize/upgrade schedule structure
+// Rearrange post-exam revision slots dynamically (constraint solver)
+// Rearrange post-exam revision slots dynamically (constraint solver)
+function rearrangePostExamRevision() {
+    if (!state.schedule) return false;
+    
+    const LATEST_REVISION_DATES = {
+        "Art Coursework": "2026-05-31",
+        "Chemistry": "2026-06-09",
+        "English Literature": "2026-06-08",
+        "English Language": "2026-06-15",
+        "Film Studies": "2026-06-15",
+        "Physics": "2026-06-16",
+        "History": "2026-06-17",
+        "Maths": "2026-06-21"
+    };
+
+    const dailySlots = {};
+    for (const date in state.schedule) {
+        dailySlots[date] = [];
+        state.schedule[date].forEach(t => {
+            for (let i = 0; i < t.hours; i++) {
+                dailySlots[date].push({ subject: t.subject, completed: t.completed });
+            }
+        });
+    }
+
+    const dates = Object.keys(dailySlots).sort();
+
+    let changed = true;
+    let anySwaps = false;
+    while (changed) {
+        changed = false;
+        for (let i = 0; i < dates.length; i++) {
+            const d1 = dates[i];
+            if (d1 === "2026-05-24") continue; // Yesterday, keep plan!
+            
+            for (let s1Idx = 0; s1Idx < dailySlots[d1].length; s1Idx++) {
+                const slot1 = dailySlots[d1][s1Idx];
+                const maxDate1 = LATEST_REVISION_DATES[slot1.subject];
+                
+                if (maxDate1 && d1 > maxDate1) {
+                    let swapFound = false;
+                    for (let j = 0; j < dates.length; j++) {
+                        const d2 = dates[j];
+                        if (d2 === "2026-05-24") continue;
+                        if (d2 > maxDate1) continue;
+                        
+                        for (let s2Idx = 0; s2Idx < dailySlots[d2].length; s2Idx++) {
+                            const slot2 = dailySlots[d2][s2Idx];
+                            const maxDate2 = LATEST_REVISION_DATES[slot2.subject];
+                            
+                            if (maxDate2 && d1 <= maxDate2 && slot1.subject !== slot2.subject) {
+                                dailySlots[d1][s1Idx] = slot2;
+                                dailySlots[d2][s2Idx] = slot1;
+                                swapFound = true;
+                                changed = true;
+                                anySwaps = true;
+                                break;
+                            }
+                        }
+                        if (swapFound) break;
+                    }
+                    if (swapFound) break;
+                }
+            }
+            if (changed) break;
+        }
+    }
+
+    const newSchedule = {};
+    for (const date of dates) {
+        const slots = dailySlots[date];
+        const tasks = [];
+        slots.forEach(s => {
+            const existing = tasks.find(t => t.subject === s.subject && t.completed === s.completed);
+            if (existing) {
+                existing.hours += 1;
+            } else {
+                tasks.push({ subject: s.subject, hours: 1, completed: s.completed });
+            }
+        });
+        newSchedule[date] = tasks;
+    }
+    
+    state.schedule = newSchedule;
+    return anySwaps;
+}
+
 function ensureStateSchema() {
-    if (!state) state = {};
+    let schemaModified = false;
+    if (!state) {
+        state = {};
+        schemaModified = true;
+    }
     if (!state.schedule || Object.keys(state.schedule).length === 0) {
         state.schedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+        schemaModified = true;
     }
     if (state.schedule && !state.schedule["2026-06-22"]) {
         state.schedule["2026-06-22"] = [];
+        schemaModified = true;
+    }
+    
+    // Rearrange post-exam revision slots dynamically
+    if (rearrangePostExamRevision()) {
+        schemaModified = true;
     }
 
-    if (!state.subtopics) state.subtopics = {};
+    if (!state.subtopics) {
+        state.subtopics = {};
+        schemaModified = true;
+    }
     for (const sub in DEFAULT_SUBTOPICS) {
         if (!state.subtopics[sub] || state.subtopics[sub].length === 0) {
             state.subtopics[sub] = DEFAULT_SUBTOPICS[sub].map(t => ({ name: t, completed: false }));
+            schemaModified = true;
         }
     }
     
-    if (!state.notes) state.notes = {};
-    if (!state.completedDays) state.completedDays = {};
-    if (!state.theme) state.theme = "dark";
+    if (!state.notes) {
+        state.notes = {};
+        schemaModified = true;
+    }
+    if (!state.completedDays) {
+        state.completedDays = {};
+        schemaModified = true;
+    }
+    if (!state.theme) {
+        state.theme = "dark";
+        schemaModified = true;
+    }
+    return schemaModified;
 }
 
 // Load state from localStorage or defaults
@@ -489,8 +872,10 @@ function loadState() {
     if (savedState) {
         try {
             state = JSON.parse(savedState);
-            ensureStateSchema();
-            saveState();
+            const changed = ensureStateSchema();
+            if (changed) {
+                saveState();
+            }
         } catch (e) {
             console.error("Error parsing saved state, restoring defaults", e);
             restoreDefaults();
@@ -615,12 +1000,19 @@ function setupEventListeners() {
         }
     });
 
-    // Modal Save Subjects
-    document.getElementById("modal-save-subjects-btn").addEventListener("click", () => {
-        if (activeModalDate && state.schedule[activeModalDate]) {
-            const sub1 = document.getElementById("modal-select-sub1").value;
-            const sub2 = document.getElementById("modal-select-sub2").value;
-            const sub3 = document.getElementById("modal-select-sub3").value;
+    // Modal Save Subjects Automatically on Selection Change
+    const select1 = document.getElementById("modal-select-sub1");
+    const select2 = document.getElementById("modal-select-sub2");
+    const select3 = document.getElementById("modal-select-sub3");
+
+    function autoUpdateModalSubjects() {
+        if (activeModalDate) {
+            if (!state.schedule[activeModalDate]) {
+                state.schedule[activeModalDate] = [];
+            }
+            const sub1 = select1.value;
+            const sub2 = select2.value;
+            const sub3 = select3.value;
             
             // Expand existing tasks into 1-hour slots
             const slots = [];
@@ -630,13 +1022,21 @@ function setupEventListeners() {
                 }
             });
             
+            // Pad to exactly 3 slots using false for completion of new slots
+            while (slots.length < 3) {
+                slots.push({ subject: "None", completed: false });
+            }
+            
             // Update subjects from selectors
-            if (slots.length >= 1) slots[0].subject = sub1;
-            if (slots.length >= 2) slots[1].subject = sub2;
-            if (slots.length >= 3) slots[2].subject = sub3;
+            slots[0].subject = sub1;
+            slots[1].subject = sub2;
+            slots[2].subject = sub3;
+            
+            // Filter out empty/None slots
+            const activeSlots = slots.filter(s => s.subject !== "None");
             
             // Reconstruct tasks as 1-hour items
-            const newTasks = slots.map(s => ({
+            const newTasks = activeSlots.map(s => ({
                 subject: s.subject,
                 hours: 1,
                 completed: s.completed
@@ -659,7 +1059,11 @@ function setupEventListeners() {
             renderModalTasks(activeModalDate);
             renderAll();
         }
-    });
+    }
+
+    if (select1) select1.addEventListener("change", autoUpdateModalSubjects);
+    if (select2) select2.addEventListener("change", autoUpdateModalSubjects);
+    if (select3) select3.addEventListener("change", autoUpdateModalSubjects);
 
     // Supabase Sync Buttons
     const pushBtn = document.getElementById("sync-push-btn");
@@ -882,39 +1286,85 @@ function renderDailyTip() {
     document.querySelector(".tip-topic").textContent = tip.topic;
 }
 
-// Render Subject Filter Pills
-function renderFilterPills() {
-    const container = document.getElementById("calendar-filter-pills");
-    if (!container) return;
-    container.innerHTML = "";
+// Render Subject Hours Histogram
+function renderCalendarHistogram() {
+    const barsContainer = document.getElementById("calendar-histogram-bars");
+    if (!barsContainer) return;
+    barsContainer.innerHTML = "";
     
-    // 1. "All" Pill
-    const allPill = document.createElement("div");
-    allPill.className = `filter-pill ${currentCalendarFilter === "all" ? "active" : ""}`;
-    allPill.textContent = "All";
-    allPill.addEventListener("click", () => {
-        currentCalendarFilter = "all";
-        renderCalendar();
-    });
-    container.appendChild(allPill);
-    
-    // 2. Subject Pills
+    // Calculate total and completed hours per subject
+    const subjectTotalHours = {};
+    const subjectCompletedHours = {};
     SUBJECTS.forEach(sub => {
-        const pill = document.createElement("div");
-        const isActive = currentCalendarFilter === sub.name;
-        pill.className = `filter-pill ${sub.colorClass} ${isActive ? "active" : ""}`;
-        pill.textContent = sub.name;
-        pill.addEventListener("click", () => {
-            currentCalendarFilter = sub.name;
+        subjectTotalHours[sub.name] = 0;
+        subjectCompletedHours[sub.name] = 0;
+    });
+    
+    for (const date in state.schedule) {
+        state.schedule[date].forEach(t => {
+            if (subjectTotalHours[t.subject] !== undefined) {
+                subjectTotalHours[t.subject] += t.hours;
+                if (t.completed) {
+                    subjectCompletedHours[t.subject] += t.hours;
+                }
+            }
+        });
+    }
+    
+    SUBJECTS.forEach(sub => {
+        const total = subjectTotalHours[sub.name] || 0;
+        const completed = subjectCompletedHours[sub.name] || 0;
+        const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+        
+        const item = document.createElement("div");
+        item.className = "histogram-bar-item";
+        
+        // Mute item if filtering and doesn't match
+        const isMuted = currentCalendarFilter !== "all" && currentCalendarFilter !== sub.name;
+        item.style.opacity = isMuted ? "0.35" : "1";
+        item.style.transition = "opacity 0.25s ease";
+        
+        const label = document.createElement("div");
+        label.className = "histogram-bar-label";
+        
+        const nameSpan = document.createElement("span");
+        nameSpan.textContent = sub.name;
+        
+        const hoursSpan = document.createElement("span");
+        hoursSpan.textContent = `${completed}/${total}h (${percentage}%)`;
+        
+        label.appendChild(nameSpan);
+        label.appendChild(hoursSpan);
+        
+        const track = document.createElement("div");
+        track.className = "histogram-bar-track";
+        
+        const fill = document.createElement("div");
+        fill.className = `histogram-bar-fill ${sub.colorClass}`;
+        fill.style.width = `${percentage}%`;
+        
+        track.appendChild(fill);
+        item.appendChild(label);
+        item.appendChild(track);
+        
+        // Interactive clicking on the histogram item to filter!
+        item.style.cursor = "pointer";
+        item.addEventListener("click", () => {
+            if (currentCalendarFilter === sub.name) {
+                currentCalendarFilter = "all";
+            } else {
+                currentCalendarFilter = sub.name;
+            }
             renderCalendar();
         });
-        container.appendChild(pill);
+        
+        barsContainer.appendChild(item);
     });
 }
 
 // Render Revision Calendar Grid
 function renderCalendar() {
-    renderFilterPills();
+    renderCalendarHistogram();
     
     const container = document.getElementById("calendar-grid-container");
     container.innerHTML = "";
@@ -939,6 +1389,32 @@ function renderCalendar() {
         // Modal trigger on click
         dayDiv.addEventListener("click", () => {
             openModal(dStr);
+        });
+        
+        // Drag and drop zone listeners
+        dayDiv.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dayDiv.classList.add("drag-hover");
+        });
+        
+        dayDiv.addEventListener("dragleave", () => {
+            dayDiv.classList.remove("drag-hover");
+        });
+        
+        dayDiv.addEventListener("drop", (e) => {
+            e.preventDefault();
+            dayDiv.classList.remove("drag-hover");
+            try {
+                const data = JSON.parse(e.dataTransfer.getData("text/plain"));
+                const { sourceDate, taskSubject } = data;
+                const targetDate = dStr;
+                
+                if (sourceDate === targetDate) return;
+                
+                moveRevisionHour(sourceDate, targetDate, taskSubject);
+            } catch (err) {
+                console.error("Drop failed:", err);
+            }
         });
         
         container.appendChild(dayDiv);
@@ -977,18 +1453,58 @@ function renderCalendarDay(dStr, dayDiv) {
     }
     
     tasks.forEach(t => {
-        const badge = document.createElement("span");
-        const subMeta = SUBJECTS.find(s => s.name === t.subject);
-        const badgeClass = subMeta ? subMeta.colorClass : "";
-        badge.className = `subject-badge ${badgeClass}`;
-        
-        // Mute badge if filtering and doesn't match
-        if (currentCalendarFilter !== "all" && t.subject !== currentCalendarFilter) {
-            badge.classList.add("subject-muted");
+        for (let i = 0; i < t.hours; i++) {
+            const badge = document.createElement("span");
+            const subMeta = SUBJECTS.find(s => s.name === t.subject);
+            const badgeClass = subMeta ? subMeta.colorClass : "";
+            badge.className = `subject-badge ${badgeClass}`;
+            badge.draggable = true;
+            
+            // Mute badge if filtering and doesn't match
+            if (currentCalendarFilter !== "all" && t.subject !== currentCalendarFilter) {
+                badge.classList.add("subject-muted");
+            }
+            
+            const textNode = document.createTextNode(`${t.subject} (1h)`);
+            badge.appendChild(textNode);
+
+            const delBtn = document.createElement("button");
+            delBtn.className = "badge-delete-btn";
+            delBtn.innerHTML = "&times;";
+            delBtn.title = `Delete 1h of ${t.subject}`;
+            delBtn.addEventListener("click", (e) => {
+                e.stopPropagation(); // Prevent opening modal
+                if (state.schedule[dStr]) {
+                    const taskIndex = state.schedule[dStr].findIndex(task => task.subject === t.subject);
+                    if (taskIndex !== -1) {
+                        state.schedule[dStr][taskIndex].hours -= 1;
+                        if (state.schedule[dStr][taskIndex].hours <= 0) {
+                            state.schedule[dStr].splice(taskIndex, 1);
+                        }
+                        saveState();
+                        renderAll();
+                    }
+                }
+            });
+            badge.appendChild(delBtn);
+            
+            // Dragstart: pass drag payload & stop event propagation
+            badge.addEventListener("dragstart", (e) => {
+                e.stopPropagation();
+                e.dataTransfer.setData("text/plain", JSON.stringify({
+                    sourceDate: dStr,
+                    taskSubject: t.subject
+                }));
+                e.dataTransfer.effectAllowed = "move";
+                badge.classList.add("dragging");
+            });
+            
+            badge.addEventListener("dragend", () => {
+                badge.classList.remove("dragging");
+            });
+            
+            subjectsDiv.appendChild(badge);
         }
-        
-        badge.textContent = `${t.subject} (${t.hours}h)`;
-        subjectsDiv.appendChild(badge);
     });
     dayDiv.appendChild(subjectsDiv);
 
@@ -1015,6 +1531,45 @@ function renderCalendarDay(dStr, dayDiv) {
         examIndicator.textContent = `📝 Exam: ${e.name}`;
         dayDiv.appendChild(examIndicator);
     });
+}
+
+// Move revision hour between days
+function moveRevisionHour(sourceDate, targetDate, subject) {
+    if (!state.schedule[sourceDate] || !state.schedule[targetDate]) return;
+    
+    // Find matching task in source date
+    const sourceTasks = state.schedule[sourceDate];
+    const taskIndex = sourceTasks.findIndex(t => t.subject === subject);
+    if (taskIndex === -1) return;
+    
+    const task = sourceTasks[taskIndex];
+    
+    // Decrement hours in source date
+    task.hours -= 1;
+    const taskWasCompleted = task.completed;
+    if (task.hours <= 0) {
+        sourceTasks.splice(taskIndex, 1);
+    }
+    
+    // Add to target date (merge if same subject & completion status exists)
+    const targetTasks = state.schedule[targetDate];
+    const targetTask = targetTasks.find(t => t.subject === subject && t.completed === taskWasCompleted);
+    
+    if (targetTask) {
+        targetTask.hours += 1;
+    } else {
+        targetTasks.push({
+            subject: subject,
+            hours: 1,
+            completed: taskWasCompleted
+        });
+    }
+    
+    // Save locally and schedule cloud push
+    saveState();
+    
+    // Full refresh of DOM
+    renderAll();
 }
 
 // Render Subject & Subtopic Tracker
@@ -1192,6 +1747,17 @@ function setupModalSubjectSelectors(dateStr) {
     select2.innerHTML = "";
     select3.innerHTML = "";
     
+    const addNoneOption = (selectEl) => {
+        const opt = document.createElement("option");
+        opt.value = "None";
+        opt.textContent = "None (No Revision)";
+        selectEl.appendChild(opt);
+    };
+    
+    addNoneOption(select1);
+    addNoneOption(select2);
+    addNoneOption(select3);
+    
     SUBJECTS.forEach(sub => {
         const opt1 = document.createElement("option");
         opt1.value = sub.name;
@@ -1218,19 +1784,14 @@ function setupModalSubjectSelectors(dateStr) {
     });
 
     const selectorArea = document.querySelector(".modal-subject-selector-area");
+    selectorArea.style.display = "block";
+    select1.style.display = "block";
+    select2.style.display = "block";
+    select3.style.display = "block";
     
-    if (slots.length === 0) {
-        selectorArea.style.display = "none";
-    } else {
-        selectorArea.style.display = "block";
-        select1.style.display = slots.length >= 1 ? "block" : "none";
-        select2.style.display = slots.length >= 2 ? "block" : "none";
-        select3.style.display = slots.length >= 3 ? "block" : "none";
-        
-        if (slots.length >= 1) select1.value = slots[0];
-        if (slots.length >= 2) select2.value = slots[1];
-        if (slots.length >= 3) select3.value = slots[2];
-    }
+    select1.value = slots.length >= 1 ? slots[0] : "None";
+    select2.value = slots.length >= 2 ? slots[1] : "None";
+    select3.value = slots.length >= 3 ? slots[2] : "None";
 }
 
 // Start the app on load

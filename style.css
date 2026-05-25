@@ -644,12 +644,48 @@ body:not(.light-theme) .theme-toggle-btn .moon-icon {
 
 .subject-badge {
     font-size: 0.7rem;
-    padding: 0.2rem 0.4rem;
+    padding: 0.2rem 1.4rem 0.2rem 0.4rem;
     border-radius: 4px;
     font-weight: 700;
     color: white;
     text-shadow: 0 1px 1px rgba(0,0,0,0.2);
     display: inline-block;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+    position: relative;
+}
+
+.subject-badge:active {
+    cursor: grabbing;
+}
+
+.badge-delete-btn {
+    position: absolute;
+    right: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.85rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 3px;
+    display: none;
+    border-radius: 3px;
+    transition: color 0.1s ease, background-color 0.1s ease;
+}
+
+.subject-badge:hover .badge-delete-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge-delete-btn:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.25);
 }
 
 /* Subject Colors class associations */
@@ -1258,3 +1294,79 @@ body:not(.light-theme) .theme-toggle-btn .moon-icon {
     filter: grayscale(0.5);
 }
 
+/* Drag and Drop Styling */
+.subject-badge.dragging {
+    opacity: 0.4;
+    transform: scale(0.95);
+}
+
+.calendar-day.drag-hover {
+    border: 2px dashed var(--primary-color) !important;
+    background-color: rgba(99, 102, 241, 0.08) !important;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.25);
+    transform: translateY(-2px);
+}
+.calendar-histogram-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.calendar-histogram-card h3 {
+    font-size: 0.85rem;
+    margin-bottom: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.histogram-bars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1rem;
+}
+
+.histogram-bar-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px solid transparent;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.histogram-bar-item:hover {
+    transform: translateY(-1px);
+    background-color: rgba(255, 255, 255, 0.04);
+    border-color: var(--border-color);
+}
+
+.histogram-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.histogram-bar-track {
+    height: 6px;
+    background-color: var(--border-color);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.histogram-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    width: 0%;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}

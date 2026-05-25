@@ -167,12 +167,6 @@
                             <h2>Revision Calendar</h2>
                             <p class="info-text">Your structured daily plan. Click any day to view notes, swap subjects, or check it off.</p>
                         </div>
-                        <div class="calendar-filter-container">
-                            <span class="filter-label">Filter:</span>
-                            <div class="filter-pills" id="calendar-filter-pills">
-                                <!-- Populated dynamically -->
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -180,6 +174,14 @@
                 <div class="print-header only-print">
                     <h1>Ronja's GCSE Revision Calendar</h1>
                     <p>May 24th - June 22nd | 3 Hours Revision per Day</p>
+                </div>
+
+                <!-- Sleek Subject Study Hours Histogram -->
+                <div class="calendar-histogram-card no-print" id="calendar-histogram-card">
+                    <h3>Subject Revision Distribution</h3>
+                    <div class="histogram-bars" id="calendar-histogram-bars">
+                        <!-- Populated dynamically by app.js -->
+                    </div>
                 </div>
 
                 <div class="calendar-grid" id="calendar-grid-container">
@@ -232,7 +234,6 @@
                         <select id="modal-select-sub3">
                             <!-- Populated with subjects -->
                         </select>
-                        <button class="save-subject-change-btn" id="modal-save-subjects-btn">Update</button>
                     </div>
                     <span class="helper-text">You can change what you study today if you need to switch things up!</span>
                 </div>

@@ -252,6 +252,7 @@ const END_DATE_STR = "2026-06-22";
 
 // Active selected day in modal
 let activeModalDate = null;
+let currentCalendarFilter = "all";
 
 // Supabase Sync Configuration & Logic
 let db = null;
@@ -881,8 +882,40 @@ function renderDailyTip() {
     document.querySelector(".tip-topic").textContent = tip.topic;
 }
 
+// Render Subject Filter Pills
+function renderFilterPills() {
+    const container = document.getElementById("calendar-filter-pills");
+    if (!container) return;
+    container.innerHTML = "";
+    
+    // 1. "All" Pill
+    const allPill = document.createElement("div");
+    allPill.className = `filter-pill ${currentCalendarFilter === "all" ? "active" : ""}`;
+    allPill.textContent = "All";
+    allPill.addEventListener("click", () => {
+        currentCalendarFilter = "all";
+        renderCalendar();
+    });
+    container.appendChild(allPill);
+    
+    // 2. Subject Pills
+    SUBJECTS.forEach(sub => {
+        const pill = document.createElement("div");
+        const isActive = currentCalendarFilter === sub.name;
+        pill.className = `filter-pill ${sub.colorClass} ${isActive ? "active" : ""}`;
+        pill.textContent = sub.name;
+        pill.addEventListener("click", () => {
+            currentCalendarFilter = sub.name;
+            renderCalendar();
+        });
+        container.appendChild(pill);
+    });
+}
+
 // Render Revision Calendar Grid
 function renderCalendar() {
+    renderFilterPills();
+    
     const container = document.getElementById("calendar-grid-container");
     container.innerHTML = "";
     
@@ -928,11 +961,32 @@ function renderCalendarDay(dStr, dayDiv) {
     subjectsDiv.className = "day-subjects-list";
     
     const tasks = state.schedule[dStr] || [];
+    const examsOnDay = EXAMS.filter(e => e.date === dStr);
+    
+    // Check if day is muted under the current filter
+    if (currentCalendarFilter !== "all") {
+        const hasMatchingTask = tasks.some(t => t.subject === currentCalendarFilter);
+        const hasMatchingExam = examsOnDay.some(e => e.subject === currentCalendarFilter);
+        if (!hasMatchingTask && !hasMatchingExam) {
+            dayDiv.classList.add("day-muted");
+        } else {
+            dayDiv.classList.remove("day-muted");
+        }
+    } else {
+        dayDiv.classList.remove("day-muted");
+    }
+    
     tasks.forEach(t => {
         const badge = document.createElement("span");
         const subMeta = SUBJECTS.find(s => s.name === t.subject);
         const badgeClass = subMeta ? subMeta.colorClass : "";
         badge.className = `subject-badge ${badgeClass}`;
+        
+        // Mute badge if filtering and doesn't match
+        if (currentCalendarFilter !== "all" && t.subject !== currentCalendarFilter) {
+            badge.classList.add("subject-muted");
+        }
+        
         badge.textContent = `${t.subject} (${t.hours}h)`;
         subjectsDiv.appendChild(badge);
     });
@@ -947,12 +1001,17 @@ function renderCalendarDay(dStr, dayDiv) {
     }
 
     // Exam indicator badge
-    const examsOnDay = EXAMS.filter(e => e.date === dStr);
     examsOnDay.forEach(e => {
         const examIndicator = document.createElement("div");
         const subMeta = SUBJECTS.find(s => s.name === e.subject);
         const badgeClass = subMeta ? subMeta.colorClass : "";
         examIndicator.className = `day-exam-indicator ${badgeClass}`;
+        
+        // Mute exam badge if filtering and doesn't match
+        if (currentCalendarFilter !== "all" && e.subject !== currentCalendarFilter) {
+            examIndicator.classList.add("subject-muted");
+        }
+        
         examIndicator.textContent = `📝 Exam: ${e.name}`;
         dayDiv.appendChild(examIndicator);
     });

@@ -162,8 +162,18 @@
             <!-- Tab content: Calendar -->
             <section id="tab-calendar" class="tab-content">
                 <div class="calendar-controls no-print">
-                    <h2>Revision Calendar</h2>
-                    <p class="info-text">Your structured daily plan. Click any day to view notes, swap subjects, or check it off.</p>
+                    <div class="calendar-header-group">
+                        <div class="calendar-header-text">
+                            <h2>Revision Calendar</h2>
+                            <p class="info-text">Your structured daily plan. Click any day to view notes, swap subjects, or check it off.</p>
+                        </div>
+                        <div class="calendar-filter-container">
+                            <span class="filter-label">Filter:</span>
+                            <div class="filter-pills" id="calendar-filter-pills">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Printable Calendar Title (shows only when printing) -->

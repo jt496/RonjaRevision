@@ -1370,3 +1370,93 @@ body:not(.light-theme) .theme-toggle-btn .moon-icon {
     width: 0%;
     transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Beautiful Password/Access Key Overlay */
+.login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 10, 12, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.login-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    padding: 2.5rem;
+    border-radius: 16px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 0.4s ease;
+}
+
+.login-card h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+
+.login-card p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.login-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.login-card input {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: var(--text-color);
+    font-size: 1rem;
+    text-align: center;
+    transition: border-color 0.2s;
+}
+
+.login-card input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(99, 102, 241, 0.2);
+}
+
+.login-card button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.login-card button:hover {
+    background-color: var(--primary-hover);
+}
+
+.login-card button:active {
+    transform: scale(0.98);
+}
+
+.login-error-text {
+    margin-top: 1rem !important;
+    color: var(--danger-color) !important;
+    font-weight: 600;
+    font-size: 0.85rem !important;
+}

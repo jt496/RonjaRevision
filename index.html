@@ -50,8 +50,8 @@
                         <i data-lucide="download-cloud"></i> Pull
                     </button>
                 </div>
-                <button class="sync-btn" id="sync-share-btn" style="margin-top: 0.25rem; width: 100%; display: flex; justify-content: center;" title="Copy shareable link with token">
-                    <i data-lucide="share-2"></i> Copy Share Link
+                <button class="sync-btn" id="logout-btn" style="margin-top: 0.5rem; width: 100%; display: flex; justify-content: center; background-color: rgba(239, 68, 68, 0.08); border-color: rgba(239, 68, 68, 0.15); color: #f87171;" title="Lock planner and clear saved token">
+                    <i data-lucide="lock"></i> Lock Planner
                 </button>
             </div>
 
@@ -247,6 +247,19 @@
                 <button class="action-btn-secondary" id="modal-toggle-status-btn">Mark Day Complete</button>
                 <button class="action-btn" id="modal-save-btn">Save Changes</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Beautiful Password/Access Key Overlay -->
+    <div id="login-overlay" class="login-overlay" style="display: none;">
+        <div class="login-card">
+            <h2>Access Revision Planner</h2>
+            <p>Please enter your access key to unlock and sync your revision plan.</p>
+            <div class="login-input-group">
+                <input type="password" id="login-token-input" placeholder="Enter Access Key..." autocomplete="off">
+                <button id="login-submit-btn">Unlock Planner</button>
+            </div>
+            <p id="login-error" class="login-error-text" style="display: none;"></p>
         </div>
     </div>
 

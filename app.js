@@ -27,407 +27,132 @@ let EXAMS = [
 
 let DEFAULT_SCHEDULE = {
   "2026-05-24": [
-    {
-      "subject": "Art Coursework",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Film Studies",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "English Literature",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "Art Coursework", "completed": true },
+    { "hours": 1, "subject": "Film Studies", "completed": true },
+    { "hours": 1, "subject": "English Literature", "completed": true }
   ],
   "2026-05-25": [
-    {
-      "subject": "Art Coursework",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Film Studies",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "English Literature",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "Art Coursework", "completed": false },
+    { "hours": 1, "subject": "Maths", "completed": false },
+    { "hours": 1, "subject": "History", "completed": false }
   ],
   "2026-05-26": [
-    {
-      "subject": "Art Coursework",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "English Literature",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Physics",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "Art Coursework", "completed": false },
+    { "hours": 1, "subject": "Physics", "completed": false },
+    { "hours": 1, "subject": "English Language", "completed": false }
   ],
   "2026-05-27": [
-    {
-      "subject": "Art Coursework",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Chemistry",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "English Language",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "Art Coursework", "completed": false },
+    { "hours": 1, "subject": "Chemistry", "completed": false },
+    { "hours": 1, "subject": "Maths", "completed": false }
   ],
   "2026-05-28": [
-    {
-      "subject": "Art Coursework",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "History",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Film Studies",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "Art Coursework", "completed": false },
+    { "hours": 1, "subject": "History", "completed": false },
+    { "hours": 1, "subject": "Film Studies", "completed": false }
   ],
   "2026-05-29": [
-    {
-      "subject": "Art Coursework",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "English Language",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "English Literature",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "Art Coursework", "completed": false },
+    { "hours": 1, "subject": "English Literature", "completed": false },
+    { "hours": 1, "subject": "Maths", "completed": false }
   ],
   "2026-05-30": [
-    {
-      "subject": "Art Coursework",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Chemistry",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Physics",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "Art Coursework", "completed": false },
+    { "hours": 1, "subject": "Chemistry", "completed": false },
+    { "hours": 1, "subject": "Physics", "completed": false }
   ],
   "2026-05-31": [
-    {
-      "subject": "Art Coursework",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "English Literature",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "English Language",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "Chemistry", "completed": false },
+    { "hours": 1, "subject": "English Literature", "completed": false },
+    { "hours": 1, "subject": "English Language", "completed": false }
   ],
   "2026-06-01": [
-    {
-      "subject": "History",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Film Studies",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Physics",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "History", "completed": false },
+    { "hours": 1, "subject": "Film Studies", "completed": false },
+    { "hours": 1, "subject": "Physics", "completed": false }
   ],
   "2026-06-02": [
-    {
-      "subject": "Chemistry",
-      "hours": 2,
-      "completed": false
-    },
-    {
-      "subject": "English Language",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "English Language", "completed": false },
+    { "hours": 1, "subject": "Chemistry", "completed": false },
+    { "hours": 1, "subject": "Maths", "completed": false }
   ],
   "2026-06-03": [
-    {
-      "subject": "English Literature",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Physics",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Film Studies",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "English Literature", "completed": false },
+    { "hours": 1, "subject": "Physics", "completed": false },
+    { "hours": 1, "subject": "Film Studies", "completed": false }
   ],
   "2026-06-04": [
-    {
-      "subject": "Chemistry",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "English Language",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "History",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "Chemistry", "completed": false },
+    { "hours": 1, "subject": "English Language", "completed": false },
+    { "hours": 1, "subject": "History", "completed": false }
   ],
   "2026-06-05": [
-    {
-      "subject": "English Literature",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Chemistry",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Film Studies",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "English Literature", "completed": false },
+    { "hours": 1, "subject": "Chemistry", "completed": false },
+    { "hours": 1, "subject": "Film Studies", "completed": false }
   ],
   "2026-06-06": [
-    {
-      "subject": "English Literature",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Chemistry",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Physics",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "English Literature", "completed": false },
+    { "hours": 1, "subject": "Chemistry", "completed": false },
+    { "hours": 1, "subject": "Physics", "completed": false }
   ],
   "2026-06-07": [
-    {
-      "subject": "English Language",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Chemistry",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "English Literature",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "Physics", "completed": false },
+    { "hours": 1, "subject": "Chemistry", "completed": false },
+    { "hours": 1, "subject": "English Literature", "completed": false }
   ],
   "2026-06-08": [
-    {
-      "subject": "English Literature",
-      "hours": 3,
-      "completed": false
-    }
+    { "hours": 2, "subject": "English Literature", "completed": false },
+    { "hours": 1, "subject": "Chemistry", "completed": false }
   ],
   "2026-06-09": [
-    {
-      "subject": "Chemistry",
-      "hours": 3,
-      "completed": false
-    }
+    { "hours": 2, "subject": "Chemistry", "completed": false }
   ],
   "2026-06-10": [
-    {
-      "subject": "Physics",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "History",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Film Studies",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "Physics", "completed": false },
+    { "hours": 1, "subject": "History", "completed": false },
+    { "hours": 1, "subject": "Film Studies", "completed": false }
   ],
   "2026-06-11": [
-    {
-      "subject": "Physics",
-      "hours": 2,
-      "completed": false
-    },
-    {
-      "subject": "English Language",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "English Language", "completed": false },
+    { "hours": 1, "subject": "Physics", "completed": false },
+    { "hours": 1, "subject": "Maths", "completed": false }
   ],
   "2026-06-12": [
-    {
-      "subject": "English Language",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Film Studies",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "History",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 2, "subject": "History", "completed": false },
+    { "hours": 1, "subject": "Film Studies", "completed": false }
   ],
   "2026-06-13": [
-    {
-      "subject": "History",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Physics",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "English Language",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "Film Studies", "completed": false },
+    { "hours": 1, "subject": "Physics", "completed": false },
+    { "hours": 1, "subject": "English Language", "completed": false }
   ],
   "2026-06-14": [
-    {
-      "subject": "Film Studies",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "English Language",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "History",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 1, "subject": "Maths", "completed": false },
+    { "hours": 1, "subject": "English Language", "completed": false },
+    { "hours": 1, "subject": "History", "completed": false }
   ],
   "2026-06-15": [
-    {
-      "subject": "English Language",
-      "hours": 1,
-      "completed": false
-    },
-    {
-      "subject": "Film Studies",
-      "hours": 2,
-      "completed": false
-    }
+    { "hours": 1, "subject": "English Language", "completed": false },
+    { "hours": 1, "subject": "Film Studies", "completed": false },
+    { "hours": 1, "subject": "English Language", "completed": false }
   ],
   "2026-06-16": [
-    {
-      "subject": "Physics",
-      "hours": 2,
-      "completed": false
-    },
-    {
-      "subject": "History",
-      "hours": 1,
-      "completed": false
-    }
+    { "hours": 2, "subject": "Physics", "completed": false },
+    { "hours": 1, "subject": "History", "completed": false }
   ],
   "2026-06-17": [
-    {
-      "subject": "History",
-      "hours": 3,
-      "completed": false
-    }
+    { "hours": 3, "subject": "History", "completed": false }
   ],
   "2026-06-18": [
-    {
-      "subject": "Maths",
-      "hours": 3,
-      "completed": false
-    }
+    { "hours": 2, "subject": "Maths", "completed": false }
   ],
-  "2026-06-19": [
-    {
-      "subject": "Maths",
-      "hours": 3,
-      "completed": false
-    }
-  ],
+  "2026-06-19": [],
   "2026-06-20": [
-    {
-      "subject": "Maths",
-      "hours": 3,
-      "completed": false
-    }
+    { "hours": 3, "subject": "Maths", "completed": false }
   ],
   "2026-06-21": [
-    {
-      "subject": "Maths",
-      "hours": 3,
-      "completed": false
-    }
+    { "hours": 3, "subject": "Maths", "completed": false }
   ],
   "2026-06-22": []
 };
@@ -531,30 +256,108 @@ try {
     console.error("Failed to initialize Supabase client:", e);
 }
 
-// Get or generate a unique sync token
+// Get sync token
 function getSyncToken() {
     const urlParams = new URLSearchParams(window.location.search);
     let token = urlParams.get('token');
     
-    if (!token) {
-        token = localStorage.getItem("ronja_sync_token");
-        if (!token) {
-            // Generate a simple unique token format: plan_abc123...
-            token = 'plan_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-            localStorage.setItem("ronja_sync_token", token);
-        }
-        // Update URL bar silently without reloading page
-        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?token=' + token;
-        window.history.replaceState({ path: newUrl }, '', newUrl);
-    } else {
+    if (token) {
         localStorage.setItem("ronja_sync_token", token);
+        // Strip the token from the URL immediately so it's not visible
+        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+        window.history.replaceState({ path: newUrl }, '', newUrl);
+        return token;
     }
-    return token;
+    
+    return localStorage.getItem("ronja_sync_token");
 }
 
-const CLOUD_STATE_ID = getSyncToken();
+let CLOUD_STATE_ID = null;
 let isSyncing = false;
 let cloudSyncTimer = null;
+
+function showLoginOverlay() {
+    const overlay = document.getElementById("login-overlay");
+    if (!overlay) return;
+    overlay.style.display = "flex";
+    
+    const input = document.getElementById("login-token-input");
+    const submitBtn = document.getElementById("login-submit-btn");
+    const errorEl = document.getElementById("login-error");
+    
+    if (input) {
+        input.value = "";
+        input.focus();
+    }
+    if (errorEl) errorEl.style.display = "none";
+    
+    const handleLoginSubmit = async () => {
+        const val = input.value.trim();
+        if (!val) {
+            showLoginError("Please enter an access key.");
+            return;
+        }
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Verifying...";
+        if (errorEl) errorEl.style.display = "none";
+        
+        if (!db) {
+            showLoginError("Database connection not initialized.");
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Unlock Planner";
+            return;
+        }
+
+        try {
+            // Check if key exists in supabase
+            const { data, error } = await db
+                .from('ronja_revision')
+                .select('id')
+                .eq('id', val)
+                .maybeSingle();
+                
+            if (error) throw error;
+            
+            if (data) {
+                // Success! Save token and proceed
+                localStorage.setItem("ronja_sync_token", val);
+                CLOUD_STATE_ID = val;
+                overlay.style.display = "none";
+                
+                // Normal initialization after unlock
+                await proceedWithInitialization();
+            } else {
+                showLoginError("Invalid access key. Please try again.");
+            }
+        } catch (e) {
+            console.error("Login verification failed:", e);
+            showLoginError("Connection failed. Check your network.");
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Unlock Planner";
+        }
+    };
+    
+    if (submitBtn) {
+        submitBtn.onclick = handleLoginSubmit;
+    }
+    if (input) {
+        input.onkeypress = (e) => {
+            if (e.key === 'Enter') {
+                handleLoginSubmit();
+            }
+        };
+    }
+}
+
+function showLoginError(msg) {
+    const errorEl = document.getElementById("login-error");
+    if (errorEl) {
+        errorEl.textContent = msg;
+        errorEl.style.display = "block";
+    }
+}
 
 function updateSyncStatusUI(status, type = 'info') {
     const statusEl = document.getElementById("sync-status");
@@ -708,6 +511,17 @@ async function fetchDefaults() {
 
 // Initialize App
 async function initApp() {
+    CLOUD_STATE_ID = getSyncToken();
+    
+    if (!CLOUD_STATE_ID) {
+        showLoginOverlay();
+        return;
+    }
+    
+    await proceedWithInitialization();
+}
+
+async function proceedWithInitialization() {
     if (db) {
         await fetchDefaults();
     }
@@ -1068,7 +882,7 @@ function setupEventListeners() {
     // Supabase Sync Buttons
     const pushBtn = document.getElementById("sync-push-btn");
     const pullBtn = document.getElementById("sync-pull-btn");
-    const shareBtn = document.getElementById("sync-share-btn");
+    const logoutBtn = document.getElementById("logout-btn");
     
     if (pushBtn) {
         pushBtn.addEventListener("click", () => {
@@ -1084,19 +898,12 @@ function setupEventListeners() {
         });
     }
 
-    if (shareBtn) {
-        shareBtn.addEventListener("click", () => {
-            const shareUrl = window.location.href;
-            navigator.clipboard.writeText(shareUrl).then(() => {
-                const originalText = shareBtn.innerHTML;
-                shareBtn.innerHTML = '<i data-lucide="check"></i> Link Copied!';
-                setTimeout(() => {
-                    shareBtn.innerHTML = originalText;
-                }, 2000);
-            }).catch(err => {
-                console.error("Failed to copy link:", err);
-                alert("Failed to copy link. Please copy the URL from your address bar.");
-            });
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+            if (confirm("Are you sure you want to lock the planner and clear your access key?")) {
+                localStorage.removeItem("ronja_sync_token");
+                window.location.reload();
+            }
         });
     }
 }

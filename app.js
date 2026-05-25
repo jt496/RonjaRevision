@@ -518,6 +518,31 @@ async function initApp() {
         return;
     }
     
+    // Verify CLOUD_STATE_ID exists in Supabase
+    if (db) {
+        try {
+            const { data, error } = await db
+                .from('ronja_revision')
+                .select('id')
+                .eq('id', CLOUD_STATE_ID)
+                .maybeSingle();
+                
+            if (error) throw error;
+            
+            if (!data) {
+                // Token does not exist!
+                localStorage.removeItem("ronja_sync_token");
+                CLOUD_STATE_ID = null;
+                showLoginOverlay();
+                showLoginError("Invalid access key. Access key not found in database.");
+                return;
+            }
+        } catch (e) {
+            console.error("Token verification failed on startup:", e);
+            // If it's a network issue, let them view the cached offline data
+        }
+    }
+    
     await proceedWithInitialization();
 }
 
@@ -882,7 +907,6 @@ function setupEventListeners() {
     // Supabase Sync Buttons
     const pushBtn = document.getElementById("sync-push-btn");
     const pullBtn = document.getElementById("sync-pull-btn");
-    const logoutBtn = document.getElementById("logout-btn");
     
     if (pushBtn) {
         pushBtn.addEventListener("click", () => {
@@ -894,15 +918,6 @@ function setupEventListeners() {
         pullBtn.addEventListener("click", () => {
             if (confirm("Are you sure you want to load your progress from the cloud? This will overwrite your current unsaved local changes.")) {
                 pullFromCloud(false);
-            }
-        });
-    }
-
-    if (logoutBtn) {
-        logoutBtn.addEventListener("click", () => {
-            if (confirm("Are you sure you want to lock the planner and clear your access key?")) {
-                localStorage.removeItem("ronja_sync_token");
-                window.location.reload();
             }
         });
     }

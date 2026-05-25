@@ -663,14 +663,20 @@ body:not(.light-theme) .theme-toggle-btn .moon-icon {
 .badge-art { background-color: var(--color-art); }
 
 .day-exam-indicator {
-    background: linear-gradient(135deg, var(--danger-color), #b91c1c);
     color: white;
     font-size: 0.7rem;
     font-weight: 800;
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
     text-align: center;
-    margin-top: auto;
+    margin-top: 4px;
+    border: 2px dashed rgba(255, 255, 255, 0.75);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.day-exam-indicator:not([class*="badge-"]) {
+    background-color: var(--danger-color);
 }
 
 .calendar-day.completed {
@@ -857,15 +863,19 @@ body:not(.light-theme) .theme-toggle-btn .moon-icon {
 .selector-row {
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .selector-row select {
-    flex-grow: 1;
+    flex: 1 1 120px;
+    min-width: 0;
     background-color: rgba(0, 0, 0, 0.2);
     border: 1px solid var(--border-color);
     color: var(--text-color);
     border-radius: 8px;
     padding: 0.5rem;
+    height: 38px;
 }
 
 .save-subject-change-btn {
@@ -876,6 +886,11 @@ body:not(.light-theme) .theme-toggle-btn .moon-icon {
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
+    flex-shrink: 0;
+    height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .helper-text {

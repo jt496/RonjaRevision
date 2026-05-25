@@ -12,7 +12,7 @@ const SUBJECTS = [
     { name: "Art Coursework", colorClass: "badge-art", hexColor: "#f97316" }
 ];
 
-const EXAMS = [
+let EXAMS = [
     { name: "Art Coursework Submission", date: "2026-06-01", subject: "Art Coursework" },
     { name: "Maths Paper 1", date: "2026-06-08", subject: "Maths" },
     { name: "English Literature", date: "2026-06-09", subject: "English Literature" },
@@ -25,7 +25,7 @@ const EXAMS = [
     { name: "Maths Paper 3", date: "2026-06-22", subject: "Maths" }
 ];
 
-const DEFAULT_SCHEDULE = {
+let DEFAULT_SCHEDULE = {
   "2026-05-24": [
     { "subject": "Art Coursework", "hours": 1, "completed": false },
     { "subject": "Film Studies", "hours": 1, "completed": false },
@@ -162,10 +162,11 @@ const DEFAULT_SCHEDULE = {
     { "subject": "Maths", "hours": 1, "completed": false },
     { "subject": "History", "hours": 1, "completed": false },
     { "subject": "Film Studies", "hours": 1, "completed": false }
-  ]
+  ],
+  "2026-06-22": []
 };
 
-const DEFAULT_SUBTOPICS = {
+let DEFAULT_SUBTOPICS = {
     "Maths": [
         "Algebra (Equations, Graphs, Sequences)",
         "Number (Fractions, Percentages, Decimals, Surds)",
@@ -403,8 +404,42 @@ async function pullFromCloud(silent = false) {
     }
 }
 
+// Fetch configuration defaults from Supabase
+async function fetchDefaults() {
+    if (!db) return;
+    try {
+        const { data, error } = await db
+            .from('ronja_revision')
+            .select('state')
+            .eq('id', 'defaults')
+            .maybeSingle();
+            
+        if (error) throw error;
+        
+        if (data && data.state) {
+            const defaults = data.state;
+            if (defaults.exams) {
+                EXAMS = defaults.exams;
+            }
+            if (defaults.default_schedule) {
+                DEFAULT_SCHEDULE = defaults.default_schedule;
+            }
+            if (defaults.default_subtopics) {
+                DEFAULT_SUBTOPICS = defaults.default_subtopics;
+            }
+            console.log("Successfully loaded defaults/configuration from Supabase.");
+        }
+    } catch (e) {
+        console.warn("Failed to fetch defaults from Supabase, using local fallback:", e);
+    }
+}
+
 // Initialize App
 async function initApp() {
+    if (db) {
+        await fetchDefaults();
+    }
+    
     loadState();
     setupTheme();
     setupEventListeners();
@@ -434,26 +469,17 @@ function loadState() {
             if (!state.schedule || Object.keys(state.schedule).length === 0) {
                 state.schedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
             }
-            // Check if the schedule is from the old version (missing or doesn't have 8 hours of Art Coursework)
-            let artHours = 0;
-            if (state.schedule) {
-                Object.values(state.schedule).forEach(dayTasks => {
-                    dayTasks.forEach(t => {
-                        if (t.subject === "Art Coursework") artHours += t.hours;
-                    });
-                });
-            }
-            if (artHours !== 8) {
-                console.log("Old schedule detected. Migrating to updated 8h Art, 3h/day schedule.");
-                state.schedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+            if (state.schedule && !state.schedule["2026-06-22"]) {
+                state.schedule["2026-06-22"] = [];
             }
 
-            if (!state.subtopics || Object.keys(state.subtopics).length === 0 || !state.subtopics["Art Coursework"]) {
-                state.subtopics = {};
-                for (const sub in DEFAULT_SUBTOPICS) {
+            if (!state.subtopics) state.subtopics = {};
+            for (const sub in DEFAULT_SUBTOPICS) {
+                if (!state.subtopics[sub] || state.subtopics[sub].length === 0) {
                     state.subtopics[sub] = DEFAULT_SUBTOPICS[sub].map(t => ({ name: t, completed: false }));
                 }
             }
+            
             if (!state.notes) state.notes = {};
             if (!state.completedDays) state.completedDays = {};
             if (!state.theme) state.theme = "dark";
@@ -589,17 +615,39 @@ function setupEventListeners() {
             const sub2 = document.getElementById("modal-select-sub2").value;
             const sub3 = document.getElementById("modal-select-sub3").value;
             
-            const count = state.schedule[activeModalDate].length;
-            if (count === 1) {
-                state.schedule[activeModalDate][0].subject = sub1;
-            } else if (count === 2) {
-                state.schedule[activeModalDate][0].subject = sub1;
-                state.schedule[activeModalDate][1].subject = sub2;
-            } else if (count === 3) {
-                state.schedule[activeModalDate][0].subject = sub1;
-                state.schedule[activeModalDate][1].subject = sub2;
-                state.schedule[activeModalDate][2].subject = sub3;
-            }
+            // Expand existing tasks into 1-hour slots
+            const slots = [];
+            state.schedule[activeModalDate].forEach(t => {
+                for (let i = 0; i < t.hours; i++) {
+                    slots.push({ subject: t.subject, completed: t.completed });
+                }
+            });
+            
+            // Update subjects from selectors
+            if (slots.length >= 1) slots[0].subject = sub1;
+            if (slots.length >= 2) slots[1].subject = sub2;
+            if (slots.length >= 3) slots[2].subject = sub3;
+            
+            // Reconstruct tasks as 1-hour items
+            const newTasks = slots.map(s => ({
+                subject: s.subject,
+                hours: 1,
+                completed: s.completed
+            }));
+            
+            // Merge adjacent tasks of same subject & completion status
+            const mergedTasks = [];
+            newTasks.forEach(t => {
+                if (mergedTasks.length > 0 && 
+                    mergedTasks[mergedTasks.length - 1].subject === t.subject && 
+                    mergedTasks[mergedTasks.length - 1].completed === t.completed) {
+                    mergedTasks[mergedTasks.length - 1].hours += 1;
+                } else {
+                    mergedTasks.push(t);
+                }
+            });
+            
+            state.schedule[activeModalDate] = mergedTasks;
             saveState();
             renderModalTasks(activeModalDate);
             renderAll();
@@ -894,12 +942,14 @@ function renderCalendarDay(dStr, dayDiv) {
 
     // Exam indicator badge
     const examsOnDay = EXAMS.filter(e => e.date === dStr);
-    if (examsOnDay.length > 0) {
+    examsOnDay.forEach(e => {
         const examIndicator = document.createElement("div");
-        examIndicator.className = "day-exam-indicator";
-        examIndicator.textContent = examsOnDay.map(e => e.name).join(" / ");
+        const subMeta = SUBJECTS.find(s => s.name === e.subject);
+        const badgeClass = subMeta ? subMeta.colorClass : "";
+        examIndicator.className = `day-exam-indicator ${badgeClass}`;
+        examIndicator.textContent = `📝 Exam: ${e.name}`;
         dayDiv.appendChild(examIndicator);
-    }
+    });
 }
 
 // Render Subject & Subtopic Tracker
@@ -1095,31 +1145,26 @@ function setupModalSubjectSelectors(dateStr) {
     });
 
     const tasks = state.schedule[dateStr] || [];
+    const slots = [];
+    tasks.forEach(t => {
+        for (let i = 0; i < t.hours; i++) {
+            slots.push(t.subject);
+        }
+    });
+
     const selectorArea = document.querySelector(".modal-subject-selector-area");
     
-    if (tasks.length === 0) {
+    if (slots.length === 0) {
         selectorArea.style.display = "none";
-    } else if (tasks.length === 1) {
+    } else {
         selectorArea.style.display = "block";
-        select1.style.display = "block";
-        select2.style.display = "none";
-        select3.style.display = "none";
-        select1.value = tasks[0].subject;
-    } else if (tasks.length === 2) {
-        selectorArea.style.display = "block";
-        select1.style.display = "block";
-        select2.style.display = "block";
-        select3.style.display = "none";
-        select1.value = tasks[0].subject;
-        select2.value = tasks[1].subject;
-    } else if (tasks.length === 3) {
-        selectorArea.style.display = "block";
-        select1.style.display = "block";
-        select2.style.display = "block";
-        select3.style.display = "block";
-        select1.value = tasks[0].subject;
-        select2.value = tasks[1].subject;
-        select3.value = tasks[2].subject;
+        select1.style.display = slots.length >= 1 ? "block" : "none";
+        select2.style.display = slots.length >= 2 ? "block" : "none";
+        select3.style.display = slots.length >= 3 ? "block" : "none";
+        
+        if (slots.length >= 1) select1.value = slots[0];
+        if (slots.length >= 2) select2.value = slots[1];
+        if (slots.length >= 3) select3.value = slots[2];
     }
 }
 

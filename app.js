@@ -369,6 +369,7 @@ async function pullFromCloud(silent = false) {
         
         if (data && data.state) {
             state = data.state;
+            ensureStateSchema();
             
             // Sync to local storage
             localStorage.setItem("ronja_gcse_planner", JSON.stringify(state));
@@ -459,30 +460,35 @@ async function initApp() {
     }
 }
 
+// Normalize/upgrade schedule structure
+function ensureStateSchema() {
+    if (!state) state = {};
+    if (!state.schedule || Object.keys(state.schedule).length === 0) {
+        state.schedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+    }
+    if (state.schedule && !state.schedule["2026-06-22"]) {
+        state.schedule["2026-06-22"] = [];
+    }
+
+    if (!state.subtopics) state.subtopics = {};
+    for (const sub in DEFAULT_SUBTOPICS) {
+        if (!state.subtopics[sub] || state.subtopics[sub].length === 0) {
+            state.subtopics[sub] = DEFAULT_SUBTOPICS[sub].map(t => ({ name: t, completed: false }));
+        }
+    }
+    
+    if (!state.notes) state.notes = {};
+    if (!state.completedDays) state.completedDays = {};
+    if (!state.theme) state.theme = "dark";
+}
+
 // Load state from localStorage or defaults
 function loadState() {
     const savedState = localStorage.getItem("ronja_gcse_planner");
     if (savedState) {
         try {
             state = JSON.parse(savedState);
-            // Verify structure matches
-            if (!state.schedule || Object.keys(state.schedule).length === 0) {
-                state.schedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
-            }
-            if (state.schedule && !state.schedule["2026-06-22"]) {
-                state.schedule["2026-06-22"] = [];
-            }
-
-            if (!state.subtopics) state.subtopics = {};
-            for (const sub in DEFAULT_SUBTOPICS) {
-                if (!state.subtopics[sub] || state.subtopics[sub].length === 0) {
-                    state.subtopics[sub] = DEFAULT_SUBTOPICS[sub].map(t => ({ name: t, completed: false }));
-                }
-            }
-            
-            if (!state.notes) state.notes = {};
-            if (!state.completedDays) state.completedDays = {};
-            if (!state.theme) state.theme = "dark";
+            ensureStateSchema();
             saveState();
         } catch (e) {
             console.error("Error parsing saved state, restoring defaults", e);

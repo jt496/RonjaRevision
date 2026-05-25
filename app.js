@@ -247,14 +247,30 @@ let currentCalendarFilter = "all";
 
 // Supabase Sync Configuration & Logic
 let db = null;
-try {
-    if (typeof supabase !== 'undefined' && typeof SUPABASE_URL !== 'undefined') {
-        const { createClient } = supabase;
-        db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+function initDbClient(token = null) {
+    try {
+        if (typeof supabase !== 'undefined' && typeof SUPABASE_URL !== 'undefined') {
+            const { createClient } = supabase;
+            if (token) {
+                db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+                    global: {
+                        headers: {
+                            'x-access-token': token
+                        }
+                    }
+                });
+            } else {
+                db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            }
+        }
+    } catch (e) {
+        console.error("Failed to initialize Supabase client:", e);
     }
-} catch (e) {
-    console.error("Failed to initialize Supabase client:", e);
 }
+
+// Initialize database client initially as unauthenticated
+initDbClient(null);
 
 // Get sync token
 function getSyncToken() {
@@ -302,6 +318,9 @@ function showLoginOverlay() {
         submitBtn.textContent = "Verifying...";
         if (errorEl) errorEl.style.display = "none";
         
+        // Initialize database client with entered token to check key
+        initDbClient(val);
+
         if (!db) {
             showLoginError("Database connection not initialized.");
             submitBtn.disabled = false;
@@ -329,10 +348,12 @@ function showLoginOverlay() {
                 await proceedWithInitialization();
             } else {
                 showLoginError("Invalid access key. Please try again.");
+                initDbClient(null); // Reset database client
             }
         } catch (e) {
             console.error("Login verification failed:", e);
             showLoginError("Connection failed. Check your network.");
+            initDbClient(null); // Reset database client
         } finally {
             submitBtn.disabled = false;
             submitBtn.textContent = "Unlock Planner";
@@ -514,9 +535,13 @@ async function initApp() {
     CLOUD_STATE_ID = getSyncToken();
     
     if (!CLOUD_STATE_ID) {
+        initDbClient(null);
         showLoginOverlay();
         return;
     }
+    
+    // Initialize database client with correct header
+    initDbClient(CLOUD_STATE_ID);
     
     // Verify CLOUD_STATE_ID exists in Supabase
     if (db) {
@@ -533,6 +558,7 @@ async function initApp() {
                 // Token does not exist!
                 localStorage.removeItem("ronja_sync_token");
                 CLOUD_STATE_ID = null;
+                initDbClient(null); // Reset client
                 showLoginOverlay();
                 showLoginError("Invalid access key. Access key not found in database.");
                 return;

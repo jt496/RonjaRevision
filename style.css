@@ -1615,3 +1615,10 @@ body:not(.light-theme) .theme-toggle-btn .moon-icon {
     align-items: center;
     gap: 0.5rem;
 }
+
+/* Fallback styling for unassigned subject badges */
+.subject-badge:not([class*="color-"]) {
+    background-color: var(--border-color);
+    color: var(--text-secondary);
+    border: 1px dashed var(--text-secondary);
+}

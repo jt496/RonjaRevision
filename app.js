@@ -878,7 +878,7 @@ function setupEventListeners() {
                     state.schedule[activeModalDate] = [];
                 }
                 state.schedule[activeModalDate].push({
-                    subject: SUBJECTS[0].name,
+                    subject: "",
                     hours: 1,
                     completed: false
                 });
@@ -1036,12 +1036,13 @@ function renderTodayFocus() {
         const color = subMeta ? subMeta.hexColor : "#cbd5e1";
         item.style.borderLeft = `5px solid ${color}`;
         
+        const subjectDisplayName = task.subject || "Unassigned Subject";
         item.innerHTML = `
             <div class="task-checkbox">
                 <i data-lucide="check"></i>
             </div>
             <div class="task-details">
-                <span class="task-subject">${task.subject}</span>
+                <span class="task-subject">${subjectDisplayName}</span>
                 <span class="task-hours">${task.hours} Hour${task.hours > 1 ? 's' : ''} Sessions</span>
             </div>
         `;
@@ -1312,13 +1313,14 @@ function renderCalendarDay(dStr, dayDiv) {
                 badge.classList.add("subject-muted");
             }
             
-            const textNode = document.createTextNode(`${t.subject} (1h)`);
+            const subjectDisplayName = t.subject || "Unassigned";
+            const textNode = document.createTextNode(`${subjectDisplayName} (1h)`);
             badge.appendChild(textNode);
 
             const delBtn = document.createElement("button");
             delBtn.className = "badge-delete-btn";
             delBtn.innerHTML = "&times;";
-            delBtn.title = `Delete 1h of ${t.subject}`;
+            delBtn.title = `Delete 1h of ${subjectDisplayName}`;
             delBtn.addEventListener("click", (e) => {
                 e.stopPropagation(); // Prevent opening modal
                 if (state.schedule[dStr]) {
@@ -1610,12 +1612,13 @@ function renderModalTasks(dateStr) {
         const color = subMeta ? subMeta.hexColor : "#cbd5e1";
         item.style.borderLeft = `5px solid ${color}`;
         
+        const subjectDisplayName = t.subject || "Unassigned Subject";
         item.innerHTML = `
             <div class="task-checkbox">
                 <i data-lucide="check"></i>
             </div>
             <div class="task-details">
-                <span class="task-subject">${t.subject}</span>
+                <span class="task-subject">${subjectDisplayName}</span>
                 <span class="task-hours">${t.hours} Hour${t.hours > 1 ? 's' : ''} Session</span>
             </div>
         `;
@@ -1664,6 +1667,15 @@ function createRevisionSlotRow(task, idx, dateStr) {
     
     const select = document.createElement("select");
     select.className = "slot-subject-select";
+    
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Select Subject...";
+    placeholder.disabled = true;
+    if (!task.subject) {
+        placeholder.selected = true;
+    }
+    select.appendChild(placeholder);
     
     SUBJECTS.forEach(sub => {
         const opt = document.createElement("option");

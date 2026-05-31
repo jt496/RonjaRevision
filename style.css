@@ -1617,7 +1617,7 @@ body:not(.light-theme) .theme-toggle-btn .moon-icon {
 }
 
 /* Fallback styling for unassigned subject badges */
-.subject-badge:not([class*="color-"]) {
+.subject-badge.unassigned {
     background-color: var(--border-color);
     color: var(--text-secondary);
     border: 1px dashed var(--text-secondary);

@@ -1304,7 +1304,7 @@ function renderCalendarDay(dStr, dayDiv) {
         for (let i = 0; i < t.hours; i++) {
             const badge = document.createElement("span");
             const subMeta = SUBJECTS.find(s => s.name === t.subject);
-            const badgeClass = subMeta ? subMeta.colorClass : "";
+            const badgeClass = subMeta ? subMeta.colorClass : "unassigned";
             badge.className = `subject-badge ${badgeClass}`;
             badge.draggable = true;
             

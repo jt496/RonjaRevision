@@ -136,6 +136,9 @@
                         <div class="card-header">
                             <div class="card-icon"><i data-lucide="clock"></i></div>
                             <h3>Exams Countdown</h3>
+                            <button class="card-header-action-btn" id="add-exam-btn" title="Add New Exam" type="button">
+                                <i data-lucide="plus"></i>
+                            </button>
                         </div>
                         <div class="card-body" id="countdowns-list-container">
                             <!-- Populated dynamically by app.js -->
@@ -220,19 +223,14 @@
                 </div>
 
                 <div class="modal-subject-selector-area">
-                    <label>Modify Revision Subject(s):</label>
-                    <div class="selector-row">
-                        <select id="modal-select-sub1">
-                            <!-- Populated with subjects -->
-                        </select>
-                        <select id="modal-select-sub2">
-                            <!-- Populated with subjects -->
-                        </select>
-                        <select id="modal-select-sub3">
-                            <!-- Populated with subjects -->
-                        </select>
+                    <label>Modify Revision Session(s):</label>
+                    <div class="revision-slots-container" id="modal-revision-slots-container">
+                        <!-- Populated dynamically by app.js -->
                     </div>
-                    <span class="helper-text">You can change what you study today if you need to switch things up!</span>
+                    <button class="add-slot-btn" id="modal-add-slot-btn" type="button">
+                        <i data-lucide="plus"></i> Add Revision Session
+                    </button>
+                    <span class="helper-text">You can change what you study today and specify the hours for each subject!</span>
                 </div>
 
                 <div class="modal-notes-section">
@@ -243,6 +241,37 @@
             <div class="modal-footer">
                 <button class="action-btn-secondary" id="modal-toggle-status-btn">Mark Day Complete</button>
                 <button class="action-btn" id="modal-save-btn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Exam Modal -->
+    <div class="modal-backdrop no-print" id="exam-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Exam</h3>
+                <button class="close-modal" id="close-exam-modal-btn"><i data-lucide="x"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="exam-name-input">Exam Name</label>
+                    <input type="text" id="exam-name-input" placeholder="e.g., Chemistry Paper 2" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="exam-subject-select">Subject</label>
+                    <select id="exam-subject-select">
+                        <!-- Populated with subjects -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exam-date-input">Exam Date</label>
+                    <input type="date" id="exam-date-input">
+                </div>
+                <p id="exam-error-msg" class="modal-error-text" style="display: none;"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn-secondary" id="cancel-exam-btn">Cancel</button>
+                <button class="action-btn" id="save-exam-btn">Add Exam</button>
             </div>
         </div>
     </div>

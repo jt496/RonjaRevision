@@ -728,6 +728,10 @@ function ensureStateSchema() {
         state.theme = "dark";
         schemaModified = true;
     }
+    if (!state.exams || state.exams.length === 0) {
+        state.exams = JSON.parse(JSON.stringify(EXAMS));
+        schemaModified = true;
+    }
     return schemaModified;
 }
 
@@ -865,70 +869,26 @@ function setupEventListeners() {
         }
     });
 
-    // Modal Save Subjects Automatically on Selection Change
-    const select1 = document.getElementById("modal-select-sub1");
-    const select2 = document.getElementById("modal-select-sub2");
-    const select3 = document.getElementById("modal-select-sub3");
-
-    function autoUpdateModalSubjects() {
-        if (activeModalDate) {
-            if (!state.schedule[activeModalDate]) {
-                state.schedule[activeModalDate] = [];
-            }
-            const sub1 = select1.value;
-            const sub2 = select2.value;
-            const sub3 = select3.value;
-            
-            // Expand existing tasks into 1-hour slots
-            const slots = [];
-            state.schedule[activeModalDate].forEach(t => {
-                for (let i = 0; i < t.hours; i++) {
-                    slots.push({ subject: t.subject, completed: t.completed });
+    // Modal Add Slot Listener
+    const addSlotBtn = document.getElementById("modal-add-slot-btn");
+    if (addSlotBtn) {
+        addSlotBtn.addEventListener("click", () => {
+            if (activeModalDate) {
+                if (!state.schedule[activeModalDate]) {
+                    state.schedule[activeModalDate] = [];
                 }
-            });
-            
-            // Pad to exactly 3 slots using false for completion of new slots
-            while (slots.length < 3) {
-                slots.push({ subject: "None", completed: false });
+                state.schedule[activeModalDate].push({
+                    subject: SUBJECTS[0].name,
+                    hours: 1,
+                    completed: false
+                });
+                saveState();
+                setupModalSubjectSelectors(activeModalDate);
+                renderModalTasks(activeModalDate);
+                renderAll();
             }
-            
-            // Update subjects from selectors
-            slots[0].subject = sub1;
-            slots[1].subject = sub2;
-            slots[2].subject = sub3;
-            
-            // Filter out empty/None slots
-            const activeSlots = slots.filter(s => s.subject !== "None");
-            
-            // Reconstruct tasks as 1-hour items
-            const newTasks = activeSlots.map(s => ({
-                subject: s.subject,
-                hours: 1,
-                completed: s.completed
-            }));
-            
-            // Merge adjacent tasks of same subject & completion status
-            const mergedTasks = [];
-            newTasks.forEach(t => {
-                if (mergedTasks.length > 0 && 
-                    mergedTasks[mergedTasks.length - 1].subject === t.subject && 
-                    mergedTasks[mergedTasks.length - 1].completed === t.completed) {
-                    mergedTasks[mergedTasks.length - 1].hours += 1;
-                } else {
-                    mergedTasks.push(t);
-                }
-            });
-            
-            state.schedule[activeModalDate] = mergedTasks;
-            saveState();
-            renderModalTasks(activeModalDate);
-            renderAll();
-        }
+        });
     }
-
-    if (select1) select1.addEventListener("change", autoUpdateModalSubjects);
-    if (select2) select2.addEventListener("change", autoUpdateModalSubjects);
-    if (select3) select3.addEventListener("change", autoUpdateModalSubjects);
 
     // Supabase Sync Buttons
     const pushBtn = document.getElementById("sync-push-btn");
@@ -945,6 +905,26 @@ function setupEventListeners() {
             if (confirm("Are you sure you want to load your progress from the cloud? This will overwrite your current unsaved local changes.")) {
                 pullFromCloud(false);
             }
+        });
+    }
+
+    // Exam Modal Action Listeners
+    const addExamBtn = document.getElementById("add-exam-btn");
+    if (addExamBtn) addExamBtn.addEventListener("click", openExamModal);
+    
+    const closeExamModalBtn = document.getElementById("close-exam-modal-btn");
+    if (closeExamModalBtn) closeExamModalBtn.addEventListener("click", closeExamModal);
+    
+    const cancelExamBtn = document.getElementById("cancel-exam-btn");
+    if (cancelExamBtn) cancelExamBtn.addEventListener("click", closeExamModal);
+    
+    const saveExamBtn = document.getElementById("save-exam-btn");
+    if (saveExamBtn) saveExamBtn.addEventListener("click", saveNewExam);
+    
+    const examModal = document.getElementById("exam-modal");
+    if (examModal) {
+        examModal.addEventListener("click", (e) => {
+            if (e.target.id === "exam-modal") closeExamModal();
         });
     }
 }
@@ -1084,8 +1064,10 @@ function renderCountdowns() {
     const todayStr = getTodayStr();
     const todayDate = new Date(todayStr);
     
-    // Sort exams by date
-    const sortedExams = [...EXAMS].sort((a, b) => new Date(a.date) - new Date(b.date));
+    // Sort exams by date, keeping track of original index
+    const sortedExams = (state.exams || [])
+        .map((exam, idx) => ({ ...exam, originalIndex: idx }))
+        .sort((a, b) => new Date(a.date) - new Date(b.date));
     
     sortedExams.forEach(exam => {
         const examDate = new Date(exam.date);
@@ -1116,8 +1098,25 @@ function renderCountdowns() {
                 <span class="exam-name">${exam.name}</span>
                 <span class="exam-date">${parsedDateStr}</span>
             </div>
-            <span class="exam-days-badge ${badgeClass}">${badgeText}</span>
+            <div class="exam-right-group">
+                <span class="exam-days-badge ${badgeClass}">${badgeText}</span>
+                <button class="exam-delete-btn" title="Delete Exam" data-idx="${exam.originalIndex}" type="button">
+                    <i data-lucide="trash-2"></i>
+                </button>
+            </div>
         `;
+        
+        const deleteBtn = item.querySelector(".exam-delete-btn");
+        if (deleteBtn) {
+            deleteBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                if (confirm(`Are you sure you want to delete the exam "${exam.name}"?`)) {
+                    state.exams.splice(exam.originalIndex, 1);
+                    saveState();
+                    renderAll();
+                }
+            });
+        }
         
         container.appendChild(item);
     });
@@ -1285,7 +1284,7 @@ function renderCalendarDay(dStr, dayDiv) {
     subjectsDiv.className = "day-subjects-list";
     
     const tasks = state.schedule[dStr] || [];
-    const examsOnDay = EXAMS.filter(e => e.date === dStr);
+    const examsOnDay = (state.exams || []).filter(e => e.date === dStr);
     
     // Check if day is muted under the current filter
     if (currentCalendarFilter !== "all") {
@@ -1502,7 +1501,7 @@ function openModal(dateStr) {
     
     // Exam Banner
     const examBanner = document.getElementById("modal-exam-alert");
-    const examsToday = EXAMS.filter(e => e.date === dateStr);
+    const examsToday = (state.exams || []).filter(e => e.date === dateStr);
     if (examsToday.length > 0) {
         examBanner.style.display = "flex";
         examBanner.querySelector("span").textContent = `EXAM TODAY: ${examsToday.map(e => e.name).join(" & ")}`;
@@ -1534,6 +1533,63 @@ function closeModal() {
     const modal = document.getElementById("day-modal");
     modal.classList.remove("open");
     activeModalDate = null;
+}
+
+function openExamModal() {
+    const modal = document.getElementById("exam-modal");
+    if (!modal) return;
+    
+    document.getElementById("exam-name-input").value = "";
+    document.getElementById("exam-date-input").value = "";
+    document.getElementById("exam-error-msg").style.display = "none";
+    document.getElementById("exam-error-msg").textContent = "";
+    
+    const select = document.getElementById("exam-subject-select");
+    select.innerHTML = "";
+    SUBJECTS.forEach(sub => {
+        const opt = document.createElement("option");
+        opt.value = sub.name;
+        opt.textContent = sub.name;
+        select.appendChild(opt);
+    });
+    
+    modal.classList.add("open");
+}
+
+function closeExamModal() {
+    const modal = document.getElementById("exam-modal");
+    if (modal) {
+        modal.classList.remove("open");
+    }
+}
+
+function saveNewExam() {
+    const name = document.getElementById("exam-name-input").value.trim();
+    const subject = document.getElementById("exam-subject-select").value;
+    const dateVal = document.getElementById("exam-date-input").value;
+    const errorMsg = document.getElementById("exam-error-msg");
+    
+    if (!name) {
+        errorMsg.textContent = "Please enter an exam name.";
+        errorMsg.style.display = "block";
+        return;
+    }
+    if (!dateVal) {
+        errorMsg.textContent = "Please select a date.";
+        errorMsg.style.display = "block";
+        return;
+    }
+    
+    if (!state.exams) state.exams = [];
+    state.exams.push({
+        name: name,
+        subject: subject,
+        date: dateVal
+    });
+    
+    saveState();
+    closeExamModal();
+    renderAll();
 }
 
 function renderModalTasks(dateStr) {
@@ -1587,59 +1643,95 @@ function updateModalStatusButton(dateStr) {
 }
 
 function setupModalSubjectSelectors(dateStr) {
-    const select1 = document.getElementById("modal-select-sub1");
-    const select2 = document.getElementById("modal-select-sub2");
-    const select3 = document.getElementById("modal-select-sub3");
+    const container = document.getElementById("modal-revision-slots-container");
+    if (!container) return;
+    container.innerHTML = "";
     
-    select1.innerHTML = "";
-    select2.innerHTML = "";
-    select3.innerHTML = "";
+    const tasks = state.schedule[dateStr] || [];
     
-    const addNoneOption = (selectEl) => {
-        const opt = document.createElement("option");
-        opt.value = "None";
-        opt.textContent = "None (No Revision)";
-        selectEl.appendChild(opt);
-    };
+    tasks.forEach((t, idx) => {
+        const row = createRevisionSlotRow(t, idx, dateStr);
+        container.appendChild(row);
+    });
     
-    addNoneOption(select1);
-    addNoneOption(select2);
-    addNoneOption(select3);
+    lucide.createIcons();
+}
+
+function createRevisionSlotRow(task, idx, dateStr) {
+    const row = document.createElement("div");
+    row.className = "revision-slot-row";
+    row.dataset.idx = idx;
+    
+    const select = document.createElement("select");
+    select.className = "slot-subject-select";
     
     SUBJECTS.forEach(sub => {
-        const opt1 = document.createElement("option");
-        opt1.value = sub.name;
-        opt1.textContent = sub.name;
-        select1.appendChild(opt1);
-        
-        const opt2 = document.createElement("option");
-        opt2.value = sub.name;
-        opt2.textContent = sub.name;
-        select2.appendChild(opt2);
-
-        const opt3 = document.createElement("option");
-        opt3.value = sub.name;
-        opt3.textContent = sub.name;
-        select3.appendChild(opt3);
-    });
-
-    const tasks = state.schedule[dateStr] || [];
-    const slots = [];
-    tasks.forEach(t => {
-        for (let i = 0; i < t.hours; i++) {
-            slots.push(t.subject);
+        const opt = document.createElement("option");
+        opt.value = sub.name;
+        opt.textContent = sub.name;
+        if (task.subject === sub.name) {
+            opt.selected = true;
         }
+        select.appendChild(opt);
     });
-
-    const selectorArea = document.querySelector(".modal-subject-selector-area");
-    selectorArea.style.display = "block";
-    select1.style.display = "block";
-    select2.style.display = "block";
-    select3.style.display = "block";
     
-    select1.value = slots.length >= 1 ? slots[0] : "None";
-    select2.value = slots.length >= 2 ? slots[1] : "None";
-    select3.value = slots.length >= 3 ? slots[2] : "None";
+    const hoursInput = document.createElement("input");
+    hoursInput.type = "number";
+    hoursInput.min = "1";
+    hoursInput.max = "10";
+    hoursInput.className = "slot-hours-input";
+    hoursInput.value = task.hours;
+    hoursInput.title = "Number of hours";
+    
+    const deleteBtn = document.createElement("button");
+    deleteBtn.type = "button";
+    deleteBtn.className = "slot-delete-btn";
+    deleteBtn.title = "Delete session";
+    deleteBtn.innerHTML = `<i data-lucide="trash-2"></i>`;
+    
+    select.addEventListener("change", () => saveModalSlots(dateStr));
+    hoursInput.addEventListener("change", () => saveModalSlots(dateStr));
+    hoursInput.addEventListener("input", () => saveModalSlots(dateStr));
+    deleteBtn.addEventListener("click", () => {
+        state.schedule[dateStr].splice(idx, 1);
+        saveState();
+        setupModalSubjectSelectors(dateStr);
+        renderModalTasks(dateStr);
+        renderAll();
+    });
+    
+    row.appendChild(select);
+    row.appendChild(hoursInput);
+    row.appendChild(deleteBtn);
+    
+    return row;
+}
+
+function saveModalSlots(dateStr) {
+    const container = document.getElementById("modal-revision-slots-container");
+    const rows = container.querySelectorAll(".revision-slot-row");
+    
+    const tasks = [];
+    rows.forEach((row, idx) => {
+        const select = row.querySelector(".slot-subject-select");
+        const hoursInput = row.querySelector(".slot-hours-input");
+        const subject = select.value;
+        const hours = parseInt(hoursInput.value) || 1;
+        
+        const existingTask = state.schedule[dateStr] && state.schedule[dateStr][idx];
+        const completed = existingTask ? existingTask.completed : false;
+        
+        tasks.push({
+            subject: subject,
+            hours: hours,
+            completed: completed
+        });
+    });
+    
+    state.schedule[dateStr] = tasks;
+    saveState();
+    renderModalTasks(dateStr);
+    renderAll();
 }
 
 // Start the app on load

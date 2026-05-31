@@ -1460,3 +1460,158 @@ body:not(.light-theme) .theme-toggle-btn .moon-icon {
     font-weight: 600;
     font-size: 0.85rem !important;
 }
+
+/* Card Header Action Buttons (e.g. + Add Exam) */
+.card-header-action-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border-radius: 6px;
+    margin-left: auto;
+    transition: all 0.2s ease;
+}
+
+.card-header-action-btn:hover {
+    color: var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Dynamic revision sessions in modal */
+.revision-slots-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    max-height: 180px;
+    overflow-y: auto;
+    padding-right: 0.25rem;
+}
+
+.revision-slot-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.revision-slot-row select {
+    flex: 1;
+    background-color: var(--sidebar-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    padding: 0.5rem;
+    height: 38px;
+}
+
+.revision-slot-row input[type="number"] {
+    width: 75px;
+    background-color: var(--sidebar-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    padding: 0.5rem;
+    height: 38px;
+    text-align: center;
+}
+
+.slot-delete-btn, .exam-delete-btn {
+    background: transparent;
+    border: none;
+    color: rgba(239, 68, 68, 0.7);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.slot-delete-btn:hover, .exam-delete-btn:hover {
+    color: var(--danger-color);
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.add-slot-btn {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.02);
+    border: 1px dashed var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.65rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.add-slot-btn:hover {
+    border-color: var(--primary-color);
+    color: var(--text-color);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Form layouts inside modals */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+}
+
+.form-group input, .form-group select {
+    background-color: var(--sidebar-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px rgba(99, 102, 241, 0.2);
+}
+
+.modal-error-text {
+    color: var(--danger-color);
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+/* Exam deletion style */
+.exam-countdown-item {
+    position: relative;
+    padding-right: 0.5rem;
+}
+
+.exam-right-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}

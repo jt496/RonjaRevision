@@ -13,6 +13,9 @@ const SUBJECTS = [
     { name: "Biology", colorClass: "badge-bio", hexColor: "#65a30d" }
 ];
 
+// Subject drop-downs list subjects alphabetically
+const SUBJECTS_ALPHABETICAL = [...SUBJECTS].sort((a, b) => a.name.localeCompare(b.name));
+
 let EXAMS = [
     { name: "English Literature", date: "2026-11-30", subject: "English Literature" },
     { name: "Maths Paper 2", date: "2026-12-01", subject: "Maths" },
@@ -1654,7 +1657,7 @@ function openExamModal() {
     
     const select = document.getElementById("exam-subject-select");
     select.innerHTML = "";
-    SUBJECTS.forEach(sub => {
+    SUBJECTS_ALPHABETICAL.forEach(sub => {
         const opt = document.createElement("option");
         opt.value = sub.name;
         opt.textContent = sub.name;
@@ -1782,8 +1785,8 @@ function createRevisionSlotRow(task, idx, dateStr) {
         placeholder.selected = true;
     }
     select.appendChild(placeholder);
-    
-    SUBJECTS.forEach(sub => {
+
+    SUBJECTS_ALPHABETICAL.forEach(sub => {
         const opt = document.createElement("option");
         opt.value = sub.name;
         opt.textContent = sub.name;

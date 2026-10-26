@@ -1,5 +1,5 @@
 // GCSE Mock Revision Planner - Ronja
-// Start date: May 24, 2026. End date: June 22, 2026.
+// Winter 2026 mocks. Start date: Oct 26, 2026. End date: Dec 15, 2026.
 
 const SUBJECTS = [
     { name: "Maths", colorClass: "badge-maths", hexColor: "#3b82f6" },
@@ -9,152 +9,211 @@ const SUBJECTS = [
     { name: "Film Studies", colorClass: "badge-film", hexColor: "#f43f5e" },
     { name: "Physics", colorClass: "badge-physics", hexColor: "#06b6d4" },
     { name: "History", colorClass: "badge-history", hexColor: "#f59e0b" },
-    { name: "Art Coursework", colorClass: "badge-art", hexColor: "#f97316" }
+    { name: "Art", colorClass: "badge-art", hexColor: "#f97316" }
 ];
 
 let EXAMS = [
-    { name: "Art Coursework Submission", date: "2026-06-01", subject: "Art Coursework" },
-    { name: "Maths Paper 1", date: "2026-06-08", subject: "Maths" },
-    { name: "English Literature", date: "2026-06-09", subject: "English Literature" },
-    { name: "Chemistry", date: "2026-06-10", subject: "Chemistry" },
-    { name: "Maths Paper 2", date: "2026-06-15", subject: "Maths" },
-    { name: "English Language", date: "2026-06-16", subject: "English Language" },
-    { name: "Film Studies", date: "2026-06-16", subject: "Film Studies" },
-    { name: "Physics", date: "2026-06-17", subject: "Physics" },
-    { name: "History", date: "2026-06-18", subject: "History" },
-    { name: "Maths Paper 3", date: "2026-06-22", subject: "Maths" }
+    { name: "English Literature", date: "2026-11-30", subject: "English Literature" },
+    { name: "Maths Paper 2", date: "2026-12-01", subject: "Maths" },
+    { name: "Film Studies Paper 1", date: "2026-12-01", subject: "Film Studies" },
+    { name: "History Paper 1", date: "2026-12-03", subject: "History" },
+    { name: "Chemistry", date: "2026-12-04", subject: "Chemistry" },
+    { name: "History Paper 2", date: "2026-12-04", subject: "History" },
+    { name: "English Language", date: "2026-12-07", subject: "English Language" },
+    { name: "Maths Paper 3", date: "2026-12-08", subject: "Maths" },
+    { name: "Film Studies Paper 2", date: "2026-12-08", subject: "Film Studies" },
+    { name: "Physics", date: "2026-12-10", subject: "Physics" },
+    { name: "Art Exam (Day 1)", date: "2026-12-14", subject: "Art" },
+    { name: "Art Exam (Day 2)", date: "2026-12-15", subject: "Art" }
 ];
 
 let DEFAULT_SCHEDULE = {
-  "2026-05-24": [
-    { "hours": 1, "subject": "Art Coursework", "completed": true },
-    { "hours": 1, "subject": "Film Studies", "completed": true },
-    { "hours": 1, "subject": "English Literature", "completed": true }
-  ],
-  "2026-05-25": [
-    { "hours": 1, "subject": "Art Coursework", "completed": false },
+  "2026-10-26": [
     { "hours": 1, "subject": "Maths", "completed": false },
-    { "hours": 1, "subject": "History", "completed": false }
+    { "hours": 1, "subject": "English Literature", "completed": false },
+    { "hours": 1, "subject": "Art", "completed": false }
   ],
-  "2026-05-26": [
-    { "hours": 1, "subject": "Art Coursework", "completed": false },
-    { "hours": 1, "subject": "Physics", "completed": false },
-    { "hours": 1, "subject": "English Language", "completed": false }
-  ],
-  "2026-05-27": [
-    { "hours": 1, "subject": "Art Coursework", "completed": false },
+  "2026-10-27": [
     { "hours": 1, "subject": "Chemistry", "completed": false },
-    { "hours": 1, "subject": "Maths", "completed": false }
-  ],
-  "2026-05-28": [
-    { "hours": 1, "subject": "Art Coursework", "completed": false },
     { "hours": 1, "subject": "History", "completed": false },
     { "hours": 1, "subject": "Film Studies", "completed": false }
   ],
-  "2026-05-29": [
-    { "hours": 1, "subject": "Art Coursework", "completed": false },
-    { "hours": 1, "subject": "English Literature", "completed": false },
+  "2026-10-28": [
+    { "hours": 1, "subject": "Physics", "completed": false },
+    { "hours": 1, "subject": "English Language", "completed": false },
     { "hours": 1, "subject": "Maths", "completed": false }
   ],
-  "2026-05-30": [
-    { "hours": 1, "subject": "Art Coursework", "completed": false },
+  "2026-10-29": [
+    { "hours": 1, "subject": "English Literature", "completed": false },
     { "hours": 1, "subject": "Chemistry", "completed": false },
-    { "hours": 1, "subject": "Physics", "completed": false }
+    { "hours": 1, "subject": "History", "completed": false }
   ],
-  "2026-05-31": [
-    { "hours": 1, "subject": "Chemistry", "completed": false },
+  "2026-10-30": [
+    { "hours": 1, "subject": "Physics", "completed": false },
+    { "hours": 1, "subject": "Art", "completed": false },
+    { "hours": 1, "subject": "Film Studies", "completed": false }
+  ],
+  "2026-10-31": [
+    { "hours": 1, "subject": "Maths", "completed": false },
     { "hours": 1, "subject": "English Literature", "completed": false },
     { "hours": 1, "subject": "English Language", "completed": false }
   ],
-  "2026-06-01": [
-    { "hours": 1, "subject": "History", "completed": false },
-    { "hours": 1, "subject": "Film Studies", "completed": false },
-    { "hours": 1, "subject": "Physics", "completed": false }
-  ],
-  "2026-06-02": [
-    { "hours": 1, "subject": "English Language", "completed": false },
+  "2026-11-01": [
     { "hours": 1, "subject": "Chemistry", "completed": false },
-    { "hours": 1, "subject": "Maths", "completed": false }
-  ],
-  "2026-06-03": [
-    { "hours": 1, "subject": "English Literature", "completed": false },
     { "hours": 1, "subject": "Physics", "completed": false },
-    { "hours": 1, "subject": "Film Studies", "completed": false }
-  ],
-  "2026-06-04": [
-    { "hours": 1, "subject": "Chemistry", "completed": false },
-    { "hours": 1, "subject": "English Language", "completed": false },
     { "hours": 1, "subject": "History", "completed": false }
   ],
-  "2026-06-05": [
-    { "hours": 1, "subject": "English Literature", "completed": false },
+  "2026-11-02": [
+    { "hours": 1, "subject": "Maths", "completed": false },
+    { "hours": 1, "subject": "English Literature", "completed": false }
+  ],
+  "2026-11-03": [
     { "hours": 1, "subject": "Chemistry", "completed": false },
+    { "hours": 1, "subject": "English Language", "completed": false }
+  ],
+  "2026-11-04": [
+    { "hours": 1, "subject": "Physics", "completed": false },
+    { "hours": 1, "subject": "History", "completed": false }
+  ],
+  "2026-11-05": [
+    { "hours": 1, "subject": "Maths", "completed": false },
     { "hours": 1, "subject": "Film Studies", "completed": false }
   ],
-  "2026-06-06": [
-    { "hours": 1, "subject": "English Literature", "completed": false },
-    { "hours": 1, "subject": "Chemistry", "completed": false },
-    { "hours": 1, "subject": "Physics", "completed": false }
-  ],
-  "2026-06-07": [
-    { "hours": 1, "subject": "Physics", "completed": false },
+  "2026-11-06": [],
+  "2026-11-07": [
     { "hours": 1, "subject": "Chemistry", "completed": false },
     { "hours": 1, "subject": "English Literature", "completed": false }
   ],
-  "2026-06-08": [
-    { "hours": 2, "subject": "English Literature", "completed": false },
-    { "hours": 1, "subject": "Chemistry", "completed": false }
-  ],
-  "2026-06-09": [
-    { "hours": 2, "subject": "Chemistry", "completed": false }
-  ],
-  "2026-06-10": [
+  "2026-11-08": [
     { "hours": 1, "subject": "Physics", "completed": false },
-    { "hours": 1, "subject": "History", "completed": false },
-    { "hours": 1, "subject": "Film Studies", "completed": false }
-  ],
-  "2026-06-11": [
     { "hours": 1, "subject": "English Language", "completed": false },
-    { "hours": 1, "subject": "Physics", "completed": false },
+    { "hours": 1, "subject": "Art", "completed": false }
+  ],
+  "2026-11-09": [
+    { "hours": 1, "subject": "History", "completed": false },
     { "hours": 1, "subject": "Maths", "completed": false }
   ],
-  "2026-06-12": [
-    { "hours": 2, "subject": "History", "completed": false },
+  "2026-11-10": [
+    { "hours": 1, "subject": "Chemistry", "completed": false },
+    { "hours": 1, "subject": "English Language", "completed": false }
+  ],
+  "2026-11-11": [
+    { "hours": 1, "subject": "Physics", "completed": false },
     { "hours": 1, "subject": "Film Studies", "completed": false }
   ],
-  "2026-06-13": [
-    { "hours": 1, "subject": "Film Studies", "completed": false },
-    { "hours": 1, "subject": "Physics", "completed": false },
-    { "hours": 1, "subject": "English Language", "completed": false }
-  ],
-  "2026-06-14": [
+  "2026-11-12": [
     { "hours": 1, "subject": "Maths", "completed": false },
-    { "hours": 1, "subject": "English Language", "completed": false },
     { "hours": 1, "subject": "History", "completed": false }
   ],
-  "2026-06-15": [
+  "2026-11-13": [],
+  "2026-11-14": [
+    { "hours": 1, "subject": "Chemistry", "completed": false },
+    { "hours": 1, "subject": "English Literature", "completed": false }
+  ],
+  "2026-11-15": [
+    { "hours": 1, "subject": "Physics", "completed": false },
     { "hours": 1, "subject": "English Language", "completed": false },
-    { "hours": 1, "subject": "Film Studies", "completed": false },
+    { "hours": 1, "subject": "Art", "completed": false }
+  ],
+  "2026-11-16": [
+    { "hours": 1, "subject": "Maths", "completed": false },
+    { "hours": 1, "subject": "English Literature", "completed": false }
+  ],
+  "2026-11-17": [
+    { "hours": 1, "subject": "Physics", "completed": false },
+    { "hours": 1, "subject": "History", "completed": false }
+  ],
+  "2026-11-18": [
+    { "hours": 1, "subject": "Chemistry", "completed": false },
     { "hours": 1, "subject": "English Language", "completed": false }
   ],
-  "2026-06-16": [
-    { "hours": 2, "subject": "Physics", "completed": false },
+  "2026-11-19": [
+    { "hours": 1, "subject": "Maths", "completed": false },
+    { "hours": 1, "subject": "Film Studies", "completed": false }
+  ],
+  "2026-11-20": [],
+  "2026-11-21": [
+    { "hours": 1, "subject": "Physics", "completed": false },
+    { "hours": 1, "subject": "English Literature", "completed": false }
+  ],
+  "2026-11-22": [
+    { "hours": 1, "subject": "Maths", "completed": false },
+    { "hours": 1, "subject": "History", "completed": false },
+    { "hours": 1, "subject": "English Language", "completed": false }
+  ],
+  "2026-11-23": [
+    { "hours": 1, "subject": "History", "completed": false },
+    { "hours": 1, "subject": "Chemistry", "completed": false }
+  ],
+  "2026-11-24": [
+    { "hours": 1, "subject": "English Literature", "completed": false },
+    { "hours": 1, "subject": "Maths", "completed": false }
+  ],
+  "2026-11-25": [
+    { "hours": 1, "subject": "Film Studies", "completed": false },
     { "hours": 1, "subject": "History", "completed": false }
   ],
-  "2026-06-17": [
-    { "hours": 3, "subject": "History", "completed": false }
+  "2026-11-26": [
+    { "hours": 1, "subject": "English Literature", "completed": false },
+    { "hours": 1, "subject": "Chemistry", "completed": false }
   ],
-  "2026-06-18": [
-    { "hours": 2, "subject": "Maths", "completed": false }
+  "2026-11-27": [],
+  "2026-11-28": [
+    { "hours": 1, "subject": "Maths", "completed": false },
+    { "hours": 1, "subject": "Film Studies", "completed": false }
   ],
-  "2026-06-19": [],
-  "2026-06-20": [
-    { "hours": 3, "subject": "Maths", "completed": false }
+  "2026-11-29": [
+    { "hours": 2, "subject": "English Literature", "completed": false },
+    { "hours": 1, "subject": "Maths", "completed": false }
   ],
-  "2026-06-21": [
-    { "hours": 3, "subject": "Maths", "completed": false }
+  "2026-11-30": [
+    { "hours": 1, "subject": "Maths", "completed": false },
+    { "hours": 1, "subject": "Film Studies", "completed": false }
   ],
-  "2026-06-22": []
+  "2026-12-01": [
+    { "hours": 1, "subject": "History", "completed": false },
+    { "hours": 1, "subject": "Chemistry", "completed": false }
+  ],
+  "2026-12-02": [
+    { "hours": 1, "subject": "History", "completed": false },
+    { "hours": 1, "subject": "Chemistry", "completed": false }
+  ],
+  "2026-12-03": [
+    { "hours": 1, "subject": "Chemistry", "completed": false },
+    { "hours": 1, "subject": "History", "completed": false }
+  ],
+  "2026-12-04": [],
+  "2026-12-05": [
+    { "hours": 1, "subject": "English Language", "completed": false },
+    { "hours": 1, "subject": "Maths", "completed": false }
+  ],
+  "2026-12-06": [
+    { "hours": 1, "subject": "English Language", "completed": false },
+    { "hours": 1, "subject": "Maths", "completed": false },
+    { "hours": 1, "subject": "Film Studies", "completed": false }
+  ],
+  "2026-12-07": [
+    { "hours": 1, "subject": "Maths", "completed": false },
+    { "hours": 1, "subject": "Film Studies", "completed": false }
+  ],
+  "2026-12-08": [
+    { "hours": 2, "subject": "Physics", "completed": false }
+  ],
+  "2026-12-09": [
+    { "hours": 2, "subject": "Physics", "completed": false }
+  ],
+  "2026-12-10": [
+    { "hours": 2, "subject": "Art", "completed": false }
+  ],
+  "2026-12-11": [],
+  "2026-12-12": [
+    { "hours": 2, "subject": "Art", "completed": false }
+  ],
+  "2026-12-13": [
+    { "hours": 3, "subject": "Art", "completed": false }
+  ],
+  "2026-12-14": [],
+  "2026-12-15": []
 };
 
 let DEFAULT_SUBTOPICS = {
@@ -211,11 +270,11 @@ let DEFAULT_SUBTOPICS = {
         "Early Elizabethan England (1558-1588)",
         "Medicine in Britain (c1250-present)"
     ],
-    "Art Coursework": [
-        "Portfolio Development",
+    "Art": [
+        "Artist Research & Connections",
         "Supporting Studies & Sketchbooks",
-        "Final Outcome Preparation",
-        "Artist Research & Connections"
+        "Experiments with Media & Techniques",
+        "Final Piece Planning & Trial Pieces"
     ]
 };
 
@@ -238,8 +297,11 @@ let state = {
 };
 
 // Target date formats
-const START_DATE_STR = "2026-05-24";
-const END_DATE_STR = "2026-06-22";
+const START_DATE_STR = "2026-10-26";
+const END_DATE_STR = "2026-12-15";
+
+// Identifies the current revision plan. Saved state from a different plan is archived and replaced.
+const PLAN_ID = "winter-2026-mocks";
 
 // Active selected day in modal
 let activeModalDate = null;
@@ -512,7 +574,8 @@ async function fetchDefaults() {
             
         if (error) throw error;
         
-        if (data && data.state) {
+        // Ignore defaults saved for an earlier plan
+        if (data && data.state && data.state.plan_id === PLAN_ID) {
             const defaults = data.state;
             if (defaults.exams) {
                 EXAMS = defaults.exams;
@@ -603,14 +666,14 @@ function rearrangePostExamRevision() {
     if (!state.schedule) return false;
     
     const LATEST_REVISION_DATES = {
-        "Art Coursework": "2026-05-31",
-        "Chemistry": "2026-06-09",
-        "English Literature": "2026-06-08",
-        "English Language": "2026-06-15",
-        "Film Studies": "2026-06-15",
-        "Physics": "2026-06-16",
-        "History": "2026-06-17",
-        "Maths": "2026-06-21"
+        "English Literature": "2026-11-29",
+        "History": "2026-12-03",
+        "Chemistry": "2026-12-03",
+        "English Language": "2026-12-06",
+        "Maths": "2026-12-07",
+        "Film Studies": "2026-12-07",
+        "Physics": "2026-12-09",
+        "Art": "2026-12-13"
     };
 
     const dailySlots = {};
@@ -631,24 +694,23 @@ function rearrangePostExamRevision() {
         changed = false;
         for (let i = 0; i < dates.length; i++) {
             const d1 = dates[i];
-            if (d1 === "2026-05-24") continue; // Yesterday, keep plan!
-            
+
             for (let s1Idx = 0; s1Idx < dailySlots[d1].length; s1Idx++) {
                 const slot1 = dailySlots[d1][s1Idx];
                 const maxDate1 = LATEST_REVISION_DATES[slot1.subject];
-                
-                if (maxDate1 && d1 > maxDate1) {
+
+                // Completed sessions already happened, keep them where they are
+                if (maxDate1 && d1 > maxDate1 && !slot1.completed) {
                     let swapFound = false;
                     for (let j = 0; j < dates.length; j++) {
                         const d2 = dates[j];
-                        if (d2 === "2026-05-24") continue;
                         if (d2 > maxDate1) continue;
-                        
+
                         for (let s2Idx = 0; s2Idx < dailySlots[d2].length; s2Idx++) {
                             const slot2 = dailySlots[d2][s2Idx];
                             const maxDate2 = LATEST_REVISION_DATES[slot2.subject];
-                            
-                            if (maxDate2 && d1 <= maxDate2 && slot1.subject !== slot2.subject) {
+
+                            if (maxDate2 && d1 <= maxDate2 && slot1.subject !== slot2.subject && !slot2.completed) {
                                 dailySlots[d1][s1Idx] = slot2;
                                 dailySlots[d2][s2Idx] = slot1;
                                 swapFound = true;
@@ -691,12 +753,32 @@ function ensureStateSchema() {
         state = {};
         schemaModified = true;
     }
+    // New revision plan: archive the previous plan's progress and start fresh
+    if (state.planId !== PLAN_ID) {
+        if (state.schedule && Object.keys(state.schedule).length > 0) {
+            if (!state.archive) state.archive = {};
+            state.archive[state.planId || "summer-2026-mocks"] = {
+                schedule: state.schedule,
+                subtopics: state.subtopics,
+                notes: state.notes,
+                completedDays: state.completedDays,
+                exams: state.exams
+            };
+        }
+        state.schedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
+        state.subtopics = {};
+        state.notes = {};
+        state.completedDays = {};
+        state.exams = JSON.parse(JSON.stringify(EXAMS));
+        state.planId = PLAN_ID;
+        schemaModified = true;
+    }
     if (!state.schedule || Object.keys(state.schedule).length === 0) {
         state.schedule = JSON.parse(JSON.stringify(DEFAULT_SCHEDULE));
         schemaModified = true;
     }
-    if (state.schedule && !state.schedule["2026-06-22"]) {
-        state.schedule["2026-06-22"] = [];
+    if (state.schedule && !state.schedule[END_DATE_STR]) {
+        state.schedule[END_DATE_STR] = [];
         schemaModified = true;
     }
     
@@ -763,6 +845,8 @@ function restoreDefaults() {
     state.notes = {};
     state.completedDays = {};
     state.theme = "dark";
+    state.exams = JSON.parse(JSON.stringify(EXAMS));
+    state.planId = PLAN_ID;
     saveState();
 }
 
@@ -931,8 +1015,8 @@ function setupEventListeners() {
 
 // Helpers
 function getTodayStr() {
-    // Check if the current time matches 2026-05-24 to 2026-06-22
-    // If not, clamp it to 2026-05-24 for demo purposes
+    // Check if the current time falls within the planner's schedule
+    // If not, clamp it to the start date for demo purposes
     const now = new Date();
     const formatted = now.toISOString().split("T")[0];
     if (state.schedule[formatted]) {
@@ -1226,6 +1310,15 @@ function renderCalendar() {
         container.appendChild(header);
     });
 
+    // Blank cells so the first day lines up under its weekday header
+    const firstDateStr = Object.keys(state.schedule)[0];
+    const leadingBlanks = firstDateStr ? new Date(firstDateStr).getUTCDay() : 0;
+    for (let i = 0; i < leadingBlanks; i++) {
+        const pad = document.createElement("div");
+        pad.className = "calendar-day-pad";
+        container.appendChild(pad);
+    }
+
     // Days in schedule
     for (const dStr in state.schedule) {
         const dayDiv = document.createElement("div");
@@ -1273,11 +1366,14 @@ function renderCalendarDay(dStr, dayDiv) {
     dayDiv.innerHTML = "";
     const dateObj = new Date(dStr);
     const formattedDay = dateObj.getDate();
-    
-    // Day number
+
+    // Day number (with month on the first day shown and at each month change)
     const numSpan = document.createElement("span");
     numSpan.className = "day-num";
-    numSpan.textContent = formattedDay;
+    const showMonth = formattedDay === 1 || dStr === Object.keys(state.schedule)[0];
+    numSpan.textContent = showMonth
+        ? dateObj.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })
+        : formattedDay;
     dayDiv.appendChild(numSpan);
     
     // Subject Badges

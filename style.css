@@ -23,6 +23,7 @@
     --color-physics: #06b6d4;
     --color-history: #f59e0b;
     --color-art: #f97316;
+    --color-bio: #65a30d;
 }
 
 .light-theme {
@@ -701,6 +702,7 @@ body:not(.light-theme) .theme-toggle-btn .moon-icon {
 .badge-physics { background-color: var(--color-physics); }
 .badge-history { background-color: var(--color-history); }
 .badge-art { background-color: var(--color-art); }
+.badge-bio { background-color: var(--color-bio); }
 
 .day-exam-indicator {
     color: white;
@@ -1284,6 +1286,7 @@ body:not(.light-theme) .theme-toggle-btn .moon-icon {
 .filter-pill.active.badge-physics { background-color: var(--color-physics); border-color: var(--color-physics); box-shadow: 0 0 10px rgba(6, 182, 212, 0.3); color: white; }
 .filter-pill.active.badge-history { background-color: var(--color-history); border-color: var(--color-history); box-shadow: 0 0 10px rgba(245, 158, 11, 0.3); color: white; }
 .filter-pill.active.badge-art { background-color: var(--color-art); border-color: var(--color-art); box-shadow: 0 0 10px rgba(249, 115, 22, 0.3); color: white; }
+.filter-pill.active.badge-bio { background-color: var(--color-bio); border-color: var(--color-bio); box-shadow: 0 0 10px rgba(101, 163, 13, 0.3); color: white; }
 
 /* Calendar Muting Effects */
 .calendar-day.day-muted {

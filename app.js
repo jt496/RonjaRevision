@@ -9,7 +9,8 @@ const SUBJECTS = [
     { name: "Film Studies", colorClass: "badge-film", hexColor: "#f43f5e" },
     { name: "Physics", colorClass: "badge-physics", hexColor: "#06b6d4" },
     { name: "History", colorClass: "badge-history", hexColor: "#f59e0b" },
-    { name: "Art", colorClass: "badge-art", hexColor: "#f97316" }
+    { name: "Art", colorClass: "badge-art", hexColor: "#f97316" },
+    { name: "Biology", colorClass: "badge-bio", hexColor: "#65a30d" }
 ];
 
 let EXAMS = [
@@ -275,6 +276,15 @@ let DEFAULT_SUBTOPICS = {
         "Supporting Studies & Sketchbooks",
         "Experiments with Media & Techniques",
         "Final Piece Planning & Trial Pieces"
+    ],
+    "Biology": [
+        "Cell Biology",
+        "Organisation",
+        "Infection & Response",
+        "Bioenergetics",
+        "Homeostasis & Response",
+        "Inheritance, Variation & Evolution",
+        "Ecology"
     ]
 };
 
